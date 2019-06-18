@@ -8,6 +8,12 @@ function functions_init() {
     # Important to avoid compiler errors on nonenglish systems
     export LANG=de_DE.UTF-8
     export LC_ALL=C
+
+    # No ccache anymore since Android Q/10
+    # Need to get installed/initiated
+    # https://sx.ix5.org/info/post/android-q-changes/
+    export CCACHE_EXEC=/usr/bin/ccache
+    export USE_CCACHE=1
 }
 
 function functions_create_folders() {
