@@ -38,8 +38,6 @@ function add_custom_hacks() {
     git fetch https://github.com/MarijnS95/android_bootable_recovery && git cherry-pick 4bd587db4a881b129d0b36a82187ca8d3390b2b8
 
     # TODO: Needed for decryption support, until it got merged into omnirom
-    cd ${customROM_dir}/bootable/recovery
-    git fetch https://gerrit.omnirom.org/android_bootable_recovery refs/changes/92/34092/3 && git cherry-pick FETCH_HEAD
     cd ${customROM_dir}/system/sepolicy
     git fetch https://gerrit.omnirom.org/android_system_sepolicy refs/changes/19/33719/4 && git cherry-pick FETCH_HEAD
     cd ${customROM_dir}/build/make
