@@ -24,7 +24,7 @@ function add_custom_hacks() {
 
     # TODO: Needed for logcat support, until it got merged into omnirom
     cd ${customROM_dir}/device/sony/tama-common
-    #git fetch https://gerrit.omnirom.org/android_device_sony_tama-common refs/changes/64/33364/5 && git cherry-pick FETCH_HEAD
+    git fetch https://gerrit.omnirom.org/android_device_sony_tama-common refs/changes/64/33364/6 && git cherry-pick FETCH_HEAD
 
     # TODO: Hack until Marijn uploads his gerrit CR's. Or they can't get upstreamed and will be here forever. Needed to fix build.
     cd ${customROM_dir}/bootable/recovery
