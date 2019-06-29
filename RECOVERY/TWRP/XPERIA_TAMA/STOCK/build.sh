@@ -53,10 +53,6 @@ function add_custom_hacks() {
     cd ${customROM_dir}/build/make
     git fetch https://gerrit.omnirom.org/android_build refs/changes/20/33720/3 && git cherry-pick FETCH_HEAD
 
-    # TODO: Needed TW_INCLUDE_REPACKTOOLS := true Add an GUI button to repack the boot partition with the current TWRP ramdisk. This will remove the need of TWRP .zip installers.
-    cd ${customROM_dir}/device/sony/tama-common
-    git fetch https://gerrit.omnirom.org/android_device_sony_tama-common refs/changes/06/33806/2 && git cherry-pick FETCH_HEAD
-
     # Added the file needed to fix the touch in the service definition right after the decryption preparations
     sed -i -e 's/exec u:r:recovery:s0 root root -- \/sbin\/prepdecrypt.sh/exec u:r:recovery:s0 root root -- \/sbin\/prepdecrypt.sh\n    exec u:r:recovery:s0 root root -- \/sbin\/preptouch.sh/g' ${customROM_dir}/device/sony/tama-common/recovery/init.recovery.twrp.rc
     echo "####CUSTOMROM HACKS ADDING END####"

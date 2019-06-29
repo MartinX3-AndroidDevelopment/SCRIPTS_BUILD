@@ -42,10 +42,6 @@ function add_custom_hacks() {
     git fetch https://gerrit.omnirom.org/android_system_sepolicy refs/changes/19/33719/4 && git cherry-pick FETCH_HEAD
     cd ${customROM_dir}/build/make
     git fetch https://gerrit.omnirom.org/android_build refs/changes/20/33720/3 && git cherry-pick FETCH_HEAD
-
-    # TODO: Needed TW_INCLUDE_REPACKTOOLS := true Add an GUI button to repack the boot partition with the current TWRP ramdisk. This will remove the need of TWRP .zip installers.
-    cd ${customROM_dir}/device/sony/tama-common
-    git fetch https://gerrit.omnirom.org/android_device_sony_tama-common refs/changes/06/33806/2 && git cherry-pick FETCH_HEAD
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
