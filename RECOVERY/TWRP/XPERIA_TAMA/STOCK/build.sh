@@ -27,32 +27,6 @@ function add_custom_hacks() {
     # patching the prepdecrypt.sh files to adapt the differences of the stock firmware
     sed -i -e 's/oem_a/vendor$suffix/g' ${customROM_dir}/device/sony/tama-common/recovery/prepdecrypt.sh
 
-    # TWRP needs -eng
-    printf "add_lunch_combo omni_akari-eng" >> ${customROM_dir}/device/sony/akari/vendorsetup.sh
-    printf "add_lunch_combo omni_apollo-eng" >> ${customROM_dir}/device/sony/apollo/vendorsetup.sh
-    printf "add_lunch_combo omni_akatsuki-eng" >> ${customROM_dir}/device/sony/akatsuki/vendorsetup.sh
-
-    # TODO: Needed for logcat support, until it got merged into OmniROM  // conflicts with repack tools
-    cd ${customROM_dir}/device/sony/tama-common
-    git fetch https://gerrit.omnirom.org/android_device_sony_tama-common refs/changes/64/33364/6 && git cherry-pick FETCH_HEAD
-
-    # TODO: Hack until Marijn uploads his gerrit CR's into TWRP. Or they can't get upstreamed and will be here forever. Needed to fix build.
-    cd ${customROM_dir}/bootable/recovery
-    git fetch https://github.com/MarijnS95/android_bootable_recovery && git cherry-pick 2f5c920c6d911b5900c0d1566a9f7d682d7fce00
-    git fetch https://github.com/MarijnS95/android_bootable_recovery && git cherry-pick 116edf6dd9ffb69602226863ad244dce4f14db90
-    git fetch https://github.com/MarijnS95/android_bootable_recovery && git cherry-pick c72a02510da5c24b9693f3a33424d20936db13ad
-    git fetch https://github.com/MarijnS95/android_bootable_recovery && git cherry-pick 984f54a211489259895acaacae68778a390b02c2
-    git fetch https://github.com/MarijnS95/android_bootable_recovery && git cherry-pick 103f178615d1c6daac3c771c6d64ac46ab8eef5a
-    git fetch https://github.com/MarijnS95/android_bootable_recovery && git cherry-pick af2e389f92f43822297bae19022747c8a56c2ac3
-    git fetch https://github.com/MarijnS95/android_bootable_recovery && git cherry-pick 948c4f2d5894208afd40829a3429c3101f00c9ab
-    git fetch https://github.com/MarijnS95/android_bootable_recovery && git cherry-pick 4bd587db4a881b129d0b36a82187ca8d3390b2b8
-
-    # TODO: Needed for decryption support, until it got merged into OmniROM
-    cd ${customROM_dir}/system/sepolicy
-    git fetch https://gerrit.omnirom.org/android_system_sepolicy refs/changes/19/33719/4 && git cherry-pick FETCH_HEAD
-    cd ${customROM_dir}/build/make
-    git fetch https://gerrit.omnirom.org/android_build refs/changes/20/33720/3 && git cherry-pick FETCH_HEAD
-
     # Added the file needed to fix the touch in the service definition right after the decryption preparations
     sed -i -e 's/exec u:r:recovery:s0 root root -- \/sbin\/prepdecrypt.sh/exec u:r:recovery:s0 root root -- \/sbin\/prepdecrypt.sh\n    exec u:r:recovery:s0 root root -- \/sbin\/preptouch.sh/g' ${customROM_dir}/device/sony/tama-common/recovery/init.recovery.twrp.rc
     echo "####CUSTOMROM HACKS ADDING END####"

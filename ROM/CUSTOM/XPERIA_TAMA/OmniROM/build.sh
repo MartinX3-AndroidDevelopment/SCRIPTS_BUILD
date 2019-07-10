@@ -13,15 +13,9 @@ function add_custom_hacks() {
     echo "####CUSTOMROM HACKS ADDING START####"
     cd ${customROM_dir}
 
-    # TODO: Workaround for the camera focus issue until it gets fixed in the camera driver
+    #Revert 'fastboot boot twrp.img' support to make OmniROM bootable
     cd ${customROM_dir}/kernel/sony/msm
-    git fetch https://github.com/kholk/kernel 232r14-headless-sde && git cherry-pick d5c2a4926c7ba56a983588c2f354620d4f8dcdd8
-
-    # TODO: Needed for decryption support, until it got merged into omnirom
-    cd ${customROM_dir}/system/sepolicy
-    git fetch https://gerrit.omnirom.org/android_system_sepolicy refs/changes/19/33719/4 && git cherry-pick FETCH_HEAD
-    cd ${customROM_dir}/build/make
-    git fetch https://gerrit.omnirom.org/android_build refs/changes/20/33720/3 && git cherry-pick FETCH_HEAD
+    git revert --no-edit 8319c00bb88bae449480ccc7139de87e37831f71
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
