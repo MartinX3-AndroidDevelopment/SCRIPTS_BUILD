@@ -213,6 +213,7 @@ functions_create_folders ${build_out}/xz3
 
 functions_test_repo_up_to_date
 
+functions_clean_builds ${build_cache_stock_kernel}
 functions_clean_builds ${build_out}/xz2
 functions_clean_builds ${build_out}/xz2p
 functions_clean_builds ${build_out}/xz2c
@@ -243,6 +244,7 @@ functions_compress_builds ${build_out}/xz2p twrp_stock_xz2p_${stock_version_numb
 functions_compress_builds ${build_out}/xz2c twrp_stock_xz2c_${stock_version_number}
 functions_compress_builds ${build_out}/xz3 twrp_stock_xz3_${stock_version_number}
 
+functions_clean_builds ${build_cache_stock_kernel}
 functions_clean_builds ${build_out}/xz2
 functions_clean_builds ${build_out}/xz2p
 functions_clean_builds ${build_out}/xz2c
