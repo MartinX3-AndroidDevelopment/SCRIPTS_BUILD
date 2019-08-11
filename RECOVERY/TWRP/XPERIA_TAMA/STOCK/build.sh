@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#
+# Copyright (c) 2019 Martin Dünkelmann
+# All rights reserved.
+#
 
 function set_variables() {
     build_cache=/media/martin/extLinux/developer/android/cache/omniROM #CustomROM out dir

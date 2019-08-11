@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#
+# Copyright (c) 2019 Martin Dünkelmann
+# All rights reserved.
+#
 
 function functions_init() {
     # Important to avoid compiler errors on nonenglish systems

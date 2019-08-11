@@ -1,3 +1,6 @@
+Copyright (c) 2019 Martin Dünkelmann  
+All rights reserved.
+
 # OmniROM
 
 ## Links

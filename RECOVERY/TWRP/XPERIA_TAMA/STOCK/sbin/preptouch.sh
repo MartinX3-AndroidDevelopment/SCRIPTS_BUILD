@@ -1,5 +1,8 @@
 #!/sbin/sh
-
+#
+# Copyright (c) 2019 Martin Dünkelmann
+# All rights reserved.
+#
 # We use this shell script because the script will follow symlinks and
 # different trees will use different binaries to supply the setenforce
 # tool. Before M we use toolbox, M and beyond will use toybox. The init
