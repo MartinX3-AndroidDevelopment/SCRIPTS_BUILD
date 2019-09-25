@@ -23,7 +23,7 @@ All rights reserved.
     ```
 - Download the code into the device repos created above:
     ```bash
-    cd omniROM
+    cd sonyaosp
     repo sync -j$((`nproc`));
     ```
 - Build the image ("-userdebug" build):

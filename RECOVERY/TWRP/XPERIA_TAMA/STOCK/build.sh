@@ -5,13 +5,13 @@
 #
 
 function set_variables() {
-    build_cache=/media/martin/extLinux/developer/android/cache/omniROM #CustomROM out dir
-    build_cache_SODP_TWRP=/media/martin/extLinux/developer/android/cache/twrp/stock/SODP_TWRP
-    build_cache_stock_kernel=/media/martin/extLinux/developer/android/cache/twrp/stock/stockKernelBinary
-    build_out=/media/martin/extLinux/developer/android/out/twrp/stock
+    build_cache=/media/martin/extLinux/developer/android/cache/omniROM/9 #CustomROM out dir
+    build_cache_SODP_TWRP=/media/martin/extLinux/developer/android/cache/twrp/stock/9/SODP_TWRP
+    build_cache_stock_kernel=/media/martin/extLinux/developer/android/cache/twrp/stock/9/stockKernelBinary
+    build_out=/media/martin/extLinux/developer/android/out/twrp/stock/9
     current_dir=$(pwd)
     current_dir_tools_aik=/media/martin/extLinux/developer/android/tools/Android-Image-Kitchen
-    customROM_dir=/home/developer/android/omniROM90
+    customROM_dir=/home/developer/android/rom/omniROM/9
     stock_kernel_dir=/home/developer/android/MartinX3sAndroidDevelopment/KERNEL_SONY_XPERIA_STOCK
     stock_version_number=52.0.A.8.131
     # absolute path, no shell variables or the compilation of the stock kernel fails

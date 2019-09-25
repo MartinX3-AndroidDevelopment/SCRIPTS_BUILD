@@ -6,10 +6,10 @@
 
 function set_variables() {
     echo "####SET VARIABLES START####"
-    build_cache=/media/martin/extLinux/developer/android/cache/omniROM #CustomROM out dir
-    build_out=/media/martin/extLinux/developer/android/out/omniROM
+    build_cache=/media/martin/extLinux/developer/android/cache/omniROM/9 #CustomROM out dir
+    build_out=/media/martin/extLinux/developer/android/out/omniROM/9
     current_dir=$(pwd)
-    customROM_dir=/home/developer/android/omniROM90
+    customROM_dir=/home/developer/android/rom/omniROM/9
     echo "####SET VARIABLES END####"
 }
 
