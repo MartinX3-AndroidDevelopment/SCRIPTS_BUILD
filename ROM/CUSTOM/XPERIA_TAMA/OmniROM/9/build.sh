@@ -46,11 +46,11 @@ function build_omniROM() {
 
     lunch omni_${product_name}-userdebug
 
-    make -j$((`nproc`-1)) installclean # Clean build while saving the buildcache.
+    make -j$((`nproc`+1)) installclean # Clean build while saving the buildcache.
 
-    make -j$((`nproc`-1)) update-api
+    make -j$((`nproc`+1)) update-api
 
-    make -j$((`nproc`-1))
+    make -j$((`nproc`+1))
 
     cp ${build_cache}/target/product/${product_name}/*.img ${build_out}/$1/
 

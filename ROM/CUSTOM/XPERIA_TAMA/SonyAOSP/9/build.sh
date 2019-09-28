@@ -50,7 +50,7 @@ function build_sonyAOSP() {
     make installclean # Clean build while saving the buildcache.
 
     make -j8 Chromium # Needs to get executed seperately, because it doesn't gets automatically build
-    make -j$((`nproc`-1))
+    make -j$((`nproc`+1))
 
     cp ${build_cache}/target/product/${product_name}/*.img ${build_out}/$1/
 
