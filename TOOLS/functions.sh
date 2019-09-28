@@ -50,7 +50,7 @@ function functions_update_customROM() {
 
     cd $1
     repo forall -vc "git reset --hard"
-    repo sync --force-sync
+    repo sync --force-sync -j32
     echo "####CustomROM UPDATE END####"
 }
 
