@@ -5,13 +5,16 @@ All rights reserved.
 Buildscripts for the projects
 
 ## Content
+- [ Android 9 ](#android-9)
+
+### Android 9
 - RECOVERY
   - TWRP
     - XPERIA_TAMA
-      - [SODP AOSP](RECOVERY/TWRP/XPERIA_TAMA/SODP/README.md)
-      - [STOCK](RECOVERY/TWRP/XPERIA_TAMA/STOCK/README.md)
+      - [SODP AOSP](RECOVERY/TWRP/XPERIA_TAMA/SODP/9/README.md)
+      - [STOCK](RECOVERY/TWRP/XPERIA_TAMA/STOCK/9/README.md)
 - ROM
   - CUSTOM
     - XPERIA_TAMA
-      - [OmniROM](ROM/CUSTOM/XPERIA_TAMA/OmniROM/README.md)
-      - [SonyAOSP](ROM/CUSTOM/XPERIA_TAMA/SonyAOSP/README.md)
+      - [OmniROM](ROM/CUSTOM/XPERIA_TAMA/OmniROM/9/README.md)
+      - [SonyAOSP](ROM/CUSTOM/XPERIA_TAMA/SonyAOSP/9/README.md)

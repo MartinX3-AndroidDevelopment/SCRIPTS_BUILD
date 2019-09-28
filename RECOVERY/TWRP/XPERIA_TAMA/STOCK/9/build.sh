@@ -192,7 +192,7 @@ echo "Did you update the tools?"
 echo "IS THIS SHELL IN THE REPOSITORY? Or did you modify the current_dir variable?"
 read -n1 -r -p "Press space to continue..."
 
-source ../../../../TOOLS/functions.sh
+source ../../../../../TOOLS/functions.sh
 
 functions_init
 
