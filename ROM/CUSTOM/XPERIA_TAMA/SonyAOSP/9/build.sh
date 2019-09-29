@@ -28,7 +28,7 @@ function build_sonyAOSP() {
     cd ${customROM_dir}
     source ${customROM_dir}/build/envsetup.sh
 
-    echo "####$1 Sim START####"
+    echo "####$1 Single Sim START####"
     case "$1" in
         "xz2_SS")
             product_name=akari
@@ -56,7 +56,7 @@ function build_sonyAOSP() {
 
     rm ${build_out}/$1/ramdisk*
     rm ${build_out}/$1/dtbo-arm64.img
-    echo "####$1 Sim END####"
+    echo "####$1 Single Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
 
