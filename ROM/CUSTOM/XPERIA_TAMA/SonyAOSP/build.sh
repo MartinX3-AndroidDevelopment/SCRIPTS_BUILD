@@ -6,10 +6,10 @@
 
 function set_variables() {
     echo "####SET VARIABLES START####"
-    build_cache=/media/martin/extLinux/developer/android/cache/sonyAOSP/9 #CustomROM out dir
-    build_out=/media/martin/extLinux/developer/android/out/sonyAOSP/9
+    build_cache=/media/martin/extLinux/developer/android/cache/sonyAOSP/10 #CustomROM out dir
+    build_out=/media/martin/extLinux/developer/android/out/sonyAOSP/10
     current_dir=$(pwd)
-    customROM_dir=/home/developer/android/rom/sonyAOSP/9
+    customROM_dir=/home/developer/android/rom/sonyAOSP/10
     echo "####SET VARIABLES END####"
 }
 
@@ -17,6 +17,24 @@ function add_custom_hacks() {
     echo "####CUSTOMROM HACKS ADDING START####"
     cd ${customROM_dir}
 
+    echo "####Executing SODP repo_update.sh START####"
+    # Executing the SODP patches
+    bash ${customROM_dir}/repo_update.sh
+    echo "####Executing SODP repo_update.sh END####"
+
+    echo "####Modifying prebuild kernel script START####"
+    #TODO: Cherry-picks making clang script usable
+    cd ${customROM_dir}/kernel/sony/msm-4.14/common-kernel
+    git fetch https://github.com/MarijnS95/kernel-sony-msm-4.14-common aosp/LA.UM.7.1.r1 && git cherry-pick 6b8a4f609d9b5c8e241d188dc949971e9595fd34 f91250fc0a9efad4affe0ca20d2e1f79c52c2dce aa6fd3ca374e4967c4eb922afef73af56091cf47 8db05786d7a38a7267e6b4da126f0e309e9a6faf
+
+    # We only want to build for tama
+    sed -i -e 's/loire tone yoshino nile ganges tama kumano/tama/g' ${customROM_dir}/kernel/sony/msm-4.14/common-kernel/build-kernels-clang.sh
+    echo "####Modifying prebuild kernel script END####"
+
+    echo "####Prebuild kernel START####"
+    cd ${customROM_dir}/kernel/sony/msm-4.14/common-kernel
+    bash ${customROM_dir}/kernel/sony/msm-4.14/common-kernel/build-kernels-clang.sh
+    echo "####Prebuild kernel END####"
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
@@ -46,13 +64,11 @@ function build_sonyAOSP() {
 
     make installclean # Clean build while saving the buildcache.
 
-    make -j8 Chromium # Needs to get executed seperately, because it doesn't gets automatically build
     make -j$((`nproc`+1))
 
-    cp ${build_cache}/target/product/${product_name}/*.img ${build_out}/$1/
-
-    rm ${build_out}/$1/ramdisk*
-    rm ${build_out}/$1/dtbo-arm64.img
+    for partition in boot dtbo system userdata vbmeta vendor; do
+        cp ${build_cache}/target/product/${product_name}/${partition}.img ${build_out}/$1/
+    done
     echo "####$1 Single Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
