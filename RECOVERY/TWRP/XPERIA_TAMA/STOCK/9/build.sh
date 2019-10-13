@@ -13,7 +13,7 @@ function set_variables() {
     current_dir_tools_aik=/media/martin/extLinux/developer/android/tools/Android-Image-Kitchen
     customROM_dir=/home/developer/android/rom/omniROM/9
     stock_kernel_dir=/home/developer/android/MartinX3sAndroidDevelopment/KERNEL_SONY_XPERIA_STOCK
-    stock_version_number=52.0.A.8.131
+    stock_version_number=52.0.A.10.6
     # absolute path, no shell variables or the compilation of the stock kernel fails
     export ARCH=arm64
     export CROSS_COMPILE=aarch64-linux-android-
@@ -256,7 +256,7 @@ functions_clean_builds ${build_out}/xz3
 
 echo "Output ${build_out}"
 read -n1 -r -p "Press space to continue..."
-echo "Upload to androidfilehost.com !"
+echo "Upload to androgidfilehost.com !"
 read -n1 -r -p "Press space to continue..."
 echo "Upload to dhacke strato server !"
 read -n1 -r -p "Press space to continue..."
