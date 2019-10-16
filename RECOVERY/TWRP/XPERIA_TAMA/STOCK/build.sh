@@ -13,7 +13,7 @@ function set_variables() {
     current_dir_tools_aik=/media/martin/extLinux/developer/android/tools/Android-Image-Kitchen
     customROM_dir=/home/developer/android/rom/omniROM/9
     stock_kernel_dir=/home/developer/android/MartinX3sAndroidDevelopment/KERNEL_SONY_XPERIA_STOCK
-    stock_version_number=52.0.A.10.6
+    stock_version_number=52.0.A.11.3
     # absolute path, no shell variables or the compilation of the stock kernel fails
     export ARCH=arm64
     export CROSS_COMPILE=aarch64-linux-android-
