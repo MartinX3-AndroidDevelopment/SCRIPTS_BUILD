@@ -12,8 +12,11 @@ function functions_init() {
     # No ccache anymore since Android Q/10
     # Need to get installed/initiated
     # https://sx.ix5.org/info/post/android-q-changes/
+    # https://sx.ix5.org/info/building-android/#optimize-the-build
     export CCACHE_EXEC=/usr/bin/ccache
     export USE_CCACHE=1
+    export CCACHE_COMPRESS=1
+    export WITHOUT_CHECK_API=true
 }
 
 function functions_create_folders() {
