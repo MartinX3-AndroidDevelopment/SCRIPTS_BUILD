@@ -42,7 +42,7 @@ function functions_test_repo_up_to_date() {
         read -n1 -r -p "Press space to continue..."
     elif [[ ${REMOTE} = ${BASE} ]]; then
         echo "Git repo as uncommited changes"
-    read -n1 -r -p "Press space to continue..."
+        read -n1 -r -p "Press space to continue..."
     else
         echo "Git repo is in a weird state."
         echo "Try 'git reset --hard'."
