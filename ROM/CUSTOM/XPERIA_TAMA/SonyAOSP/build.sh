@@ -43,7 +43,7 @@ function build_sonyAOSP() {
     cd ${customROM_dir}
     source ${customROM_dir}/build/envsetup.sh
 
-    echo "####$1 Single Sim START####"
+    echo "####$1 Sim START####"
     case "$1" in
         "xz2_SS")
             product_name=akari
@@ -57,6 +57,18 @@ function build_sonyAOSP() {
             product_name=akatsuki
             lunch aosp_h8416-userdebug
         ;;
+        "xz2_DS")
+            product_name=akari
+            lunch aosp_h8266-userdebug
+        ;;
+        "xz2c_DS")
+            product_name=apollo
+            lunch aosp_h8324-userdebug
+        ;;
+        "xz3_DS")
+            product_name=akatsuki
+            lunch aosp_h9436-userdebug
+        ;;
         *)
             echo "Unknown Option $1 in build_sonyAOSP()"
             exit 1 # die with error code 9999
@@ -69,7 +81,7 @@ function build_sonyAOSP() {
     for partition in boot dtbo system userdata vbmeta vendor; do
         cp ${build_cache}/target/product/${product_name}/${partition}.img ${build_out}/$1/
     done
-    echo "####$1 Single Sim END####"
+    echo "####$1 Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
 
@@ -87,28 +99,43 @@ functions_create_folders ${build_out}
 functions_create_folders ${build_out}/xz2_SS
 functions_create_folders ${build_out}/xz2c_SS
 functions_create_folders ${build_out}/xz3_SS
+functions_create_folders ${build_out}/xz2_DS
+functions_create_folders ${build_out}/xz2c_DS
+functions_create_folders ${build_out}/xz3_DS
 
 functions_test_repo_up_to_date
 
 functions_clean_builds ${build_out}/xz2_SS
 functions_clean_builds ${build_out}/xz2c_SS
 functions_clean_builds ${build_out}/xz3_SS
+functions_clean_builds ${build_out}/xz2_DS
+functions_clean_builds ${build_out}/xz2c_DS
+functions_clean_builds ${build_out}/xz3_DS
 
 functions_update_customROM ${customROM_dir}
 
 add_custom_hacks
 
 build_sonyAOSP xz2_SS
+build_sonyAOSP xz2_DS
 build_sonyAOSP xz2c_SS
+build_sonyAOSP xz2c_DS
 build_sonyAOSP xz3_SS
+build_sonyAOSP xz3_DS
 
 functions_compress_builds ${build_out}/xz2_SS sonyaosp_xz2_ss
 functions_compress_builds ${build_out}/xz2c_SS sonyaosp_xz2c_ss
 functions_compress_builds ${build_out}/xz3_SS sonyaosp_xz3_ss
+functions_compress_builds ${build_out}/xz2_DS sonyaosp_xz2_ds
+functions_compress_builds ${build_out}/xz2c_DS sonyaosp_xz2c_ds
+functions_compress_builds ${build_out}/xz3_DS sonyaosp_xz3_ds
 
 functions_clean_builds ${build_out}/xz2_SS
 functions_clean_builds ${build_out}/xz2c_SS
 functions_clean_builds ${build_out}/xz3_SS
+functions_clean_builds ${build_out}/xz2_DS
+functions_clean_builds ${build_out}/xz2c_DS
+functions_clean_builds ${build_out}/xz3_DS
 
 echo "Output ${build_out}"
 read -n1 -r -p "Press space to continue..."
