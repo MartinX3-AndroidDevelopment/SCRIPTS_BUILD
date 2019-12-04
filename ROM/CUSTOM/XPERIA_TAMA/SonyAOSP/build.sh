@@ -21,6 +21,12 @@ function add_custom_hacks() {
     # Executing the SODP patches
     bash ${customROM_dir}/repo_update.sh
     echo "####Executing SODP repo_update.sh END####"
+
+    echo "####Executing SODP camera workarounds START####"
+    # TODO: Workaround for the camera focus issue until it gets fixed in the camera driver
+    cd ${customROM_dir}/kernel/sony/msm-4.14
+    git fetch https://github.com/kholk/kernel 71r1_camx_actuator && git cherry-pick 6dca64a973400fa006ebb8bff60697bb46e06c29 31939379d7193f3c2f0cfc772167b7ac97f5cb21
+    echo "####Executing SODP camera workarounds END####"
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
