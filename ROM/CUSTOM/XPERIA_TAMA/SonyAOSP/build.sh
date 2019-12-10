@@ -31,7 +31,7 @@ function add_custom_hacks() {
     echo "####Modifying prebuild kernel script START####"
     #TODO: Cherry-picks making clang script usable
     cd ${customROM_dir}/kernel/sony/msm-4.14/common-kernel
-    git fetch https://github.com/MarijnS95/kernel-sony-msm-4.14-common aosp/LA.UM.7.1.r1 && git cherry-pick 6b8a4f609d9b5c8e241d188dc949971e9595fd34 f91250fc0a9efad4affe0ca20d2e1f79c52c2dce aa6fd3ca374e4967c4eb922afef73af56091cf47 8db05786d7a38a7267e6b4da126f0e309e9a6faf
+    git fetch https://github.com/MarijnS95/kernel-sony-msm-4.14-common aosp/LA.UM.7.1.r1 && git cherry-pick 393d89bb76be8727447276dd59b6febec4a9bad8 50481c1f171e25c0d49dda5f2e682f37f9b78cf5 80bb0d306d1084cf28e4144d6e6ec6eeaf45a346 774e0f952b5dd3fd152794490c166a1443d78a04
 
     # We only want to build for tama
     sed -i -e 's/loire tone yoshino nile ganges tama kumano/tama/g' ${customROM_dir}/kernel/sony/msm-4.14/common-kernel/build-kernels-clang.sh
