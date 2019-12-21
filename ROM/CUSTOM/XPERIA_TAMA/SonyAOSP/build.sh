@@ -17,9 +17,6 @@ function add_custom_hacks() {
     echo "####CUSTOMROM HACKS ADDING START####"
     cd ${customROM_dir}
 
-    # TODO: Workaround for the camera focus issue until it gets fixed in the camera driver
-    cd ${customROM_dir}/kernel/sony/msm-4.9
-    git fetch https://github.com/kholk/kernel 232r14-headless-sde && git cherry-pick d5c2a4926c7ba56a983588c2f354620d4f8dcdd8
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
