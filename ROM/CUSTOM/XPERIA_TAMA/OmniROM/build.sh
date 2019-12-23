@@ -16,6 +16,8 @@ function set_variables() {
 function add_custom_hacks() {
     echo "####CUSTOMROM HACKS ADDING START####"
     cd ${customROM_dir}
+    # Execute the SODP cherry-pick script
+    bash repo_update.sh
 
     #Revert 'fastboot boot twrp.img' support to make OmniROM bootable
     cd ${customROM_dir}/kernel/sony/msm

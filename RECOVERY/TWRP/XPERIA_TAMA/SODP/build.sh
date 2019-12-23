@@ -16,6 +16,8 @@ function set_variables() {
 function add_custom_hacks() {
     echo "####CUSTOMROM HACKS ADDING START####"
     cd ${customROM_dir}
+    # Execute the SODP cherry-pick script
+    bash repo_update.sh
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
