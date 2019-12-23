@@ -12,7 +12,7 @@ function set_variables() {
     current_dir=$(pwd)
     current_dir_tools_aik=/media/martin/extLinux/developer/android/tools/Android-Image-Kitchen
     customROM_dir=/home/developer/android/rom/omniROM/9
-    stock_kernel_dir=/home/developer/android/MartinX3sAndroidDevelopment/KERNEL_SONY_XPERIA_STOCK
+    stock_kernel_dir=/home/developer/android/MartinX3sAndroidDevelopment/sonyxperiadev-KERNEL_SONY_XPERIA_STOCK
     stock_version_number=52.0.A.11.32
     # absolute path, no shell variables or the compilation of the stock kernel fails
     export ARCH=arm64
@@ -82,7 +82,7 @@ function update_stock_kernel_repo() {
     cd ${stock_kernel_dir}
     if [[ ! -d .git ]]
     then
-        git clone https://github.com/MartinX3sAndroidDevelopment/KERNEL_SONY_XPERIA_STOCK.git -b ${stock_version_number} .
+        git clone https://github.com/MartinX3sAndroidDevelopment/sonyxperiadev-KERNEL_SONY_XPERIA_STOCK.git -b ${stock_version_number} .
     else
         git reset --hard
         git pull
