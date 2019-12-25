@@ -20,8 +20,8 @@ function add_custom_hacks() {
     bash repo_update.sh
 
     #Revert 'fastboot boot twrp.img' support to make OmniROM bootable
-    cd ${customROM_dir}/kernel/sony/msm
-    git revert --no-edit 8319c00bb88bae449480ccc7139de87e37831f71
+    cd ${customROM_dir}/kernel/sony/msm/arch/arm64/configs/sony
+    git revert --no-edit 09b31d0db2e6dcbcdb47c454ea3f7a49b670686e
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
