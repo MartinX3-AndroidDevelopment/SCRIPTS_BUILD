@@ -22,6 +22,9 @@ function add_custom_hacks() {
 
     # Execute the SODP cherry-pick script
     bash repo_update.sh
+
+    # Enabling hack to load TWRP via 'fastboot boot twrp.img'
+    echo "CONFIG_DEBUG_RENAME_SKIP_INITRAMFS_BOOTPARAM=y" >> ${customROM_dir}/kernel/sony/msm/arch/arm64/configs/sony/base_tama_common_defconfig
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 

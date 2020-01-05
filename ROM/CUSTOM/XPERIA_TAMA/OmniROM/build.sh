@@ -21,10 +21,6 @@ function add_custom_hacks() {
 
     #TODO: Make TWRP buildable -> Remove if it got merged
     git fetch "https://gerrit.twrp.me/android_bootable_recovery" refs/changes/57/1757/1 && git cherry-pick FETCH_HEAD
-
-    #Revert 'fastboot boot twrp.img' support to make OmniROM bootable
-    cd ${customROM_dir}/kernel/sony/msm/arch/arm64/configs/sony
-    git revert --no-edit 09b31d0db2e6dcbcdb47c454ea3f7a49b670686e
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
