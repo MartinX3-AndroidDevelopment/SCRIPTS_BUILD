@@ -23,7 +23,7 @@ function add_custom_hacks() {
     echo "####Executing SODP repo_update.sh END####"
 
     echo "####Modifying prebuild kernel script START####"
-    #TODO: Cherry-picks making clang script usable
+    #TODO: Try to remove this. Only Cherry-picks making clang script usable
     cd ${customROM_dir}/kernel/sony/msm-4.14/common-kernel
     git fetch https://github.com/MarijnS95/kernel-sony-msm-4.14-common aosp/LA.UM.7.1.r1 && git cherry-pick 393d89bb76be8727447276dd59b6febec4a9bad8 50481c1f171e25c0d49dda5f2e682f37f9b78cf5 80bb0d306d1084cf28e4144d6e6ec6eeaf45a346 774e0f952b5dd3fd152794490c166a1443d78a04
 
