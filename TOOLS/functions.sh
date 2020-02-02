@@ -72,7 +72,7 @@ function functions_compress_builds() {
 
 function functions_clean_builds() {
     echo "####CLEANING $1 BUILD START####"
-    rm $1/*
+    rm -f $1/*
     echo "####CLEANING $1 BUILD END####"
 }
 
