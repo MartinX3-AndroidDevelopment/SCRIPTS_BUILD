@@ -85,6 +85,9 @@ function build_sonyAOSP() {
     echo "####SONY AOSP BUILD END####"
 }
 
+# exit script immediately if a command fails
+set -e
+
 echo "IS THIS SHELL IN THE REPOSITORY? Or did you modify the current_dir variable?"
 read -n1 -r -p "Press space to continue..."
 
@@ -143,5 +146,9 @@ echo "Upload to androidfilehost.com !"
 read -n1 -r -p "Press space to continue..."
 echo "Upload to dhacke strato server !"
 read -n1 -r -p "Press space to continue..."
+
+# because "set -e" is used above, when we get to this point, we know
+# everything worked fine.
+set +e
 
 exit 0
