@@ -4,7 +4,7 @@ All rights reserved.
 # SonyAOSP
 
 ## Links
-- [XDA SonyAOSP Placeholder](https://forum.xda-developers.com/xperia-xz2/development/aosp-aosp-8-1-h8266-t3843269)
+- [XDA SonyAOSP](https://forum.xda-developers.com/xperia-xz2/development/unstable-sonyaosp-10-0r1-t3975009)
 
 ## Requirements
 - [Local manifest](https://github.com/sonyxperiadev/local_manifests)
