@@ -45,27 +45,27 @@ function build_sonyAOSP() {
 
     echo "####$1 Sim START####"
     case "$1" in
-        "xz2_SS")
+        "XZ2_SS")
             product_name=akari
             lunch aosp_h8216-userdebug
         ;;
-        "xz2c_SS")
+        "XZ2C_SS")
             product_name=apollo
             lunch aosp_h8314-userdebug
         ;;
-        "xz3_SS")
+        "XZ3_SS")
             product_name=akatsuki
             lunch aosp_h8416-userdebug
         ;;
-        "xz2_DS")
+        "XZ2_DS")
             product_name=akari
             lunch aosp_h8266-userdebug
         ;;
-        "xz2c_DS")
+        "XZ2C_DS")
             product_name=apollo
             lunch aosp_h8324-userdebug
         ;;
-        "xz3_DS")
+        "XZ3_DS")
             product_name=akatsuki
             lunch aosp_h9436-userdebug
         ;;
@@ -96,46 +96,46 @@ set_variables
 
 functions_create_folders ${build_cache}
 functions_create_folders ${build_out}
-functions_create_folders ${build_out}/xz2_SS
-functions_create_folders ${build_out}/xz2c_SS
-functions_create_folders ${build_out}/xz3_SS
-functions_create_folders ${build_out}/xz2_DS
-functions_create_folders ${build_out}/xz2c_DS
-functions_create_folders ${build_out}/xz3_DS
+functions_create_folders ${build_out}/XZ2_SS
+functions_create_folders ${build_out}/XZ2C_SS
+functions_create_folders ${build_out}/XZ3_SS
+functions_create_folders ${build_out}/XZ2_DS
+functions_create_folders ${build_out}/XZ2C_DS
+functions_create_folders ${build_out}/XZ3_DS
 
 functions_test_repo_up_to_date
 
-functions_clean_builds ${build_out}/xz2_SS
-functions_clean_builds ${build_out}/xz2c_SS
-functions_clean_builds ${build_out}/xz3_SS
-functions_clean_builds ${build_out}/xz2_DS
-functions_clean_builds ${build_out}/xz2c_DS
-functions_clean_builds ${build_out}/xz3_DS
+functions_clean_builds ${build_out}/XZ2_SS
+functions_clean_builds ${build_out}/XZ2C_SS
+functions_clean_builds ${build_out}/XZ3_SS
+functions_clean_builds ${build_out}/XZ2_DS
+functions_clean_builds ${build_out}/XZ2C_DS
+functions_clean_builds ${build_out}/XZ3_DS
 
 functions_update_customROM ${customROM_dir}
 
 add_custom_hacks
 
-build_sonyAOSP xz2_SS
-build_sonyAOSP xz2_DS
-build_sonyAOSP xz2c_SS
-build_sonyAOSP xz2c_DS
-build_sonyAOSP xz3_SS
-build_sonyAOSP xz3_DS
+build_sonyAOSP XZ2_SS
+build_sonyAOSP XZ2_DS
+build_sonyAOSP XZ2C_SS
+build_sonyAOSP XZ2C_DS
+build_sonyAOSP XZ3_SS
+build_sonyAOSP XZ3_DS
 
-functions_compress_builds ${build_out}/xz2_SS sonyaosp_xz2_ss
-functions_compress_builds ${build_out}/xz2c_SS sonyaosp_xz2c_ss
-functions_compress_builds ${build_out}/xz3_SS sonyaosp_xz3_ss
-functions_compress_builds ${build_out}/xz2_DS sonyaosp_xz2_ds
-functions_compress_builds ${build_out}/xz2c_DS sonyaosp_xz2c_ds
-functions_compress_builds ${build_out}/xz3_DS sonyaosp_xz3_ds
+functions_compress_builds ${build_out}/XZ2_SS sonyAOSP_XZ2_SS
+functions_compress_builds ${build_out}/XZ2C_SS sonyAOSP_XZ2C_SS
+functions_compress_builds ${build_out}/XZ3_SS sonyAOSP_XZ3_SS
+functions_compress_builds ${build_out}/XZ2_DS sonyAOSP_XZ2_DS
+functions_compress_builds ${build_out}/XZ2C_DS sonyAOSP_XZ2C_DS
+functions_compress_builds ${build_out}/XZ3_DS sonyAOSP_XZ3_DS
 
-functions_clean_builds ${build_out}/xz2_SS
-functions_clean_builds ${build_out}/xz2c_SS
-functions_clean_builds ${build_out}/xz3_SS
-functions_clean_builds ${build_out}/xz2_DS
-functions_clean_builds ${build_out}/xz2c_DS
-functions_clean_builds ${build_out}/xz3_DS
+functions_clean_builds ${build_out}/XZ2_SS
+functions_clean_builds ${build_out}/XZ2C_SS
+functions_clean_builds ${build_out}/XZ3_SS
+functions_clean_builds ${build_out}/XZ2_DS
+functions_clean_builds ${build_out}/XZ2C_DS
+functions_clean_builds ${build_out}/XZ3_DS
 
 echo "Output ${build_out}"
 read -n1 -r -p "Press space to continue..."
