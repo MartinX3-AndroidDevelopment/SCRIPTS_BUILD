@@ -47,26 +47,32 @@ function build_sonyAOSP() {
     case "$1" in
         "XZ2_SS")
             product_name=akari
+            dualsim=false
             lunch aosp_h8216-userdebug
         ;;
         "XZ2C_SS")
             product_name=apollo
+            dualsim=false
             lunch aosp_h8314-userdebug
         ;;
         "XZ3_SS")
             product_name=akatsuki
+            dualsim=false
             lunch aosp_h8416-userdebug
         ;;
         "XZ2_DS")
             product_name=akari
+            dualsim=true
             lunch aosp_h8266-userdebug
         ;;
         "XZ2C_DS")
             product_name=apollo
+            dualsim=true
             lunch aosp_h8324-userdebug
         ;;
         "XZ3_DS")
             product_name=akatsuki
+            dualsim=true
             lunch aosp_h9436-userdebug
         ;;
         *)
@@ -76,9 +82,15 @@ function build_sonyAOSP() {
 
     make installclean # Clean build while saving the buildcache.
 
-    make -j$((`nproc`+1))
+    if ${dualsim}; then
+        partitions="boot vendor"
+        make -j$((`nproc`+1)) bootimage vendorimage
+    else
+        partitions="boot dtbo system userdata vbmeta vendor"
+        make -j$((`nproc`+1))
+    fi
 
-    for partition in boot dtbo system userdata vbmeta vendor; do
+    for partition in ${partitions}; do
         cp ${build_cache}/target/product/${product_name}/${partition}.img ${build_out}/$1/
     done
     echo "####$1 Sim END####"
