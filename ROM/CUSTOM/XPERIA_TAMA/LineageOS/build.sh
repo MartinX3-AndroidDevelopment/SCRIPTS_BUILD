@@ -15,12 +15,11 @@ function set_variables() {
 
 function add_custom_hacks() {
     echo "####CUSTOMROM HACKS ADDING START####"
+    echo "####Executing LineageOS repo_update.sh START####"
+    # Executing the LineageOS patches
     cd ${customROM_dir}
-
-    echo "####Executing SODP repo_update.sh START####"
-    # Executing the SODP patches
     bash ${customROM_dir}/repo_update.sh
-    echo "####Executing SODP repo_update.sh END####"
+    echo "####Executing LineageOS repo_update.sh END####"
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
