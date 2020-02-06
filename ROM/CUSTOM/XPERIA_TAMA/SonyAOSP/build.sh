@@ -15,10 +15,9 @@ function set_variables() {
 
 function add_custom_hacks() {
     echo "####CUSTOMROM HACKS ADDING START####"
-    cd ${customROM_dir}
-
     echo "####Executing SODP repo_update.sh START####"
     # Executing the SODP patches
+    cd ${customROM_dir}
     bash ${customROM_dir}/repo_update.sh
     echo "####Executing SODP repo_update.sh END####"
 
