@@ -20,6 +20,16 @@ function add_custom_hacks() {
     cd ${customROM_dir}
     bash ${customROM_dir}/repo_update.sh
     echo "####Executing LineageOS repo_update.sh END####"
+
+    #TODO Remove it togeter with build-in gapps
+    echo "####WORKAROUND Update Opengapps LFS storage START####"
+    cd ${customROM_dir}/vendor/opengapps/sources/all
+    git pull lfs
+    cd ${customROM_dir}/vendor/opengapps/sources/arm
+    git pull lfs
+    cd ${customROM_dir}/vendor/opengapps/sources/arm64
+    git pull lfs
+    echo "####WORKAROUND Update Opengapps LFS storage END####"
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
