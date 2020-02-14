@@ -24,11 +24,11 @@ function add_custom_hacks() {
     #TODO Remove it togeter with build-in gapps
     echo "####WORKAROUND Update Opengapps LFS storage START####"
     cd ${customROM_dir}/vendor/opengapps/sources/all
-    git pull lfs
+    git lfs pull
     cd ${customROM_dir}/vendor/opengapps/sources/arm
-    git pull lfs
+    git lfs pull
     cd ${customROM_dir}/vendor/opengapps/sources/arm64
-    git pull lfs
+    git lfs pull
     echo "####WORKAROUND Update Opengapps LFS storage END####"
     echo "####CUSTOMROM HACKS ADDING END####"
 }
