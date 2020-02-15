@@ -29,7 +29,7 @@ function add_custom_hacks() {
     cd ${customROM_dir}
 
     #TODO: Make TWRP buildable -> Remove if it got merged
-    git fetch "https://gerrit.twrp.me/android_bootable_recovery" refs/changes/57/1757/1 && git cherry-pick FETCH_HEAD
+    git fetch "https://gerrit.twrp.me/android_bootable_recovery" refs/changes/57/1757/5 && git cherry-pick FETCH_HEAD
 
     # Enabling hack to load TWRP via 'fastboot boot twrp.img'
     echo "CONFIG_DEBUG_RENAME_SKIP_INITRAMFS_BOOTPARAM=y" >> ${customROM_dir}/kernel/sony/msm/arch/arm64/configs/sony/base_tama_common_defconfig
