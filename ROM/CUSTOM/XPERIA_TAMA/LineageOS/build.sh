@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (c) 2019 Martin Dünkelmann
+# Copyright (c) 2020 Martin Dünkelmann
 # All rights reserved.
 #
 

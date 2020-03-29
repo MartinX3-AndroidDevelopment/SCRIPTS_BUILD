@@ -5,11 +5,8 @@ All rights reserved.
 Buildscripts for the projects
 
 ## Content
-- [ Android 10 ](#android-10)
-
-### Android 10
 - ROM
   - CUSTOM
     - XPERIA_TAMA
-      - [SonyAOSP](ROM/CUSTOM/XPERIA_TAMA/SonyAOSP/10/README.md)
-      - [LineageOS](ROM/CUSTOM/XPERIA_TAMA/LineageOS/10/README.md)
+      - [SonyAOSP](ROM/CUSTOM/XPERIA_TAMA/SonyAOSP/README.md)
+      - [LineageOS](ROM/CUSTOM/XPERIA_TAMA/LineageOS/README.md)
