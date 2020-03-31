@@ -5,6 +5,11 @@ All rights reserved.
 Buildscripts for the projects
 
 ## Content
+- RECOVERY
+  - TWRP
+    - XPERIA_TAMA
+      - [SODP AOSP](RECOVERY/TWRP/XPERIA_TAMA/SODP/README.md)
+      - [STOCK](RECOVERY/TWRP/XPERIA_TAMA/STOCK/README.md)
 - ROM
   - CUSTOM
     - XPERIA_TAMA

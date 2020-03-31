@@ -1,6 +1,6 @@
 #!/sbin/sh
 #
-# Copyright (c) 2019 Martin Dünkelmann
+# Copyright (c) 2019-2020 Martin Dünkelmann
 # All rights reserved.
 #
 # We use this shell script because the script will follow symlinks and
@@ -8,11 +8,8 @@
 # tool. Before M we use toolbox, M and beyond will use toybox. The init
 # binary and init.rc will not follow symlinks.
 
+#Suffix for A/B devices is either _a or _b depending on which slot is active
 suffix=$(getprop ro.boot.slot_suffix)
-if [[ -z "$suffix" ]]; then
-	suf=$(getprop ro.boot.slot)
-	suffix="_$suf"
-fi
 
 mkdir /v
 mount -t ext4 -o ro "/dev/block/bootdevice/by-name/vendor$suffix" /v
@@ -20,7 +17,7 @@ mount -t ext4 -o ro "/dev/block/bootdevice/by-name/vendor$suffix" /v
 touch_id=`cat /sys/devices/dsi_panel_driver/panel_id`
 
 #XZ2 "3" XZ2C "4" Clearpad
-if [[ "$touch_id" == "akari default" ]] || [[ "$touch_id" == "3" ]] || [[ "$touch_id" == "4" ]]; then
+if [[ "$touch_id" == "3" ]] || [[ "$touch_id" == "4" ]]; then
     cp /v/lib/modules/clearpad_rmi_dev.ko /sbin/
     cp /v/lib/modules/clearpad_core.ko /sbin/
     cp /v/lib/modules/clearpad_i2c.ko /sbin/
@@ -32,11 +29,7 @@ if [[ "$touch_id" == "akari default" ]] || [[ "$touch_id" == "3" ]] || [[ "$touc
 fi
 
 #XZ2 "7" XZ2C "8" TCM
-if [[ "$touch_id" == "apollo default" ]] || [[ "$touch_id" == "7" ]] || [[ "$touch_id" == "8" ]]; then
-    cp /v/lib/modules/tof_sensor.ko /sbin/
-    cp /v/lib/modules/tcs3490.ko /sbin/
-    cp /v/lib/modules/sony_camera.ko /sbin/
-    cp /v/lib/modules/fpc1075_platform.ko /sbin/
+if [[ "$touch_id" == "7" ]] || [[ "$touch_id" == "8" ]]; then
     cp /v/lib/modules/synaptics_tcm_i2c.ko /sbin/
     cp /v/lib/modules/synaptics_tcm_core.ko /sbin/
     cp /v/lib/modules/synaptics_tcm_touch.ko /sbin/
@@ -46,10 +39,6 @@ if [[ "$touch_id" == "apollo default" ]] || [[ "$touch_id" == "7" ]] || [[ "$tou
     cp /v/lib/modules/synaptics_tcm_recovery.ko /sbin/
     cp /v/lib/modules/synaptics_tcm_diagnostics.ko /sbin/
 
-    insmod /sbin/tof_sensor.ko
-    insmod /sbin/tcs3490.ko
-    insmod /sbin/sony_camera.ko
-    insmod /sbin/fpc1075_platform.ko
     insmod /sbin/synaptics_tcm_i2c.ko
     insmod /sbin/synaptics_tcm_core.ko
     insmod /sbin/synaptics_tcm_touch.ko
@@ -61,7 +50,7 @@ if [[ "$touch_id" == "apollo default" ]] || [[ "$touch_id" == "7" ]] || [[ "$tou
 fi
 
 #XZ2P SSW
-if [[ "$touch_id" == "aurora default" ]] || [[ "$touch_id" == "9" ]]; then
+if [[ "$touch_id" == "9" ]]; then
     cp /v/lib/modules/ssw49501.ko /sbin/
     cp /v/lib/modules/ssw_mon.ko /sbin/
 

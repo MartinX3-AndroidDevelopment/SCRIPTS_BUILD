@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 #
-# Copyright (c) 2019 Martin Dünkelmann
+# Copyright (c) 2019-2020 Martin Dünkelmann
 # All rights reserved.
 #
 
 function set_variables() {
     echo "####SET VARIABLES START####"
-    build_cache=/media/martin/extLinux/developer/android/cache/omniROM/9 #CustomROM out dir
-    build_out=/media/martin/extLinux/developer/android/out/twrp/sodp/9
-    current_dir=$(pwd)
-    customROM_dir=/home/developer/android/rom/omniROM/9
+    functions_set_variables
+    build_out=/media/martin/extLinux/developer/android/out/twrp/sodp/10
     echo "####SET VARIABLES END####"
 }
 
@@ -17,38 +15,14 @@ function add_custom_hacks() {
     echo "####CUSTOMROM HACKS ADDING START####"
     cd ${customROM_dir}
 
-    # Enabling hack to load TWRP via 'fastboot boot twrp.img'
-    echo "CONFIG_DEBUG_RENAME_SKIP_INITRAMFS_BOOTPARAM=y" >> ${customROM_dir}/kernel/sony/msm/arch/arm64/configs/sony/base_tama_common_defconfig
+    bash repo_update.sh
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
 function build_omniROM_twrp() {
     echo "####OmniROM TWRP BUILD START####"
-    cd ${customROM_dir}
-    source ${customROM_dir}/build/envsetup.sh
-
     echo "####$1 START####"
-    case "$1" in
-        "xz2")
-            model_name=akari
-            lunch omni_akari-eng
-        ;;
-        "xz2c")
-            model_name=apollo
-            lunch omni_apollo-eng
-        ;;
-        "xz3")
-            model_name=akatsuki
-            lunch omni_akatsuki-eng
-        ;;
-        *)
-            echo "Unknown Option $1 in build_omniROM_twrp()"
-            exit 1 # die with error code 9999
-    esac
-
-    make installclean # Clean build while saving the buildcache.
-
-    make -j$((`nproc` - 1)) bootimage
+    functions_build_omniROM_twrp $1 false # TW_IS_FOR_STOCK=false
 
     yes | cp -rf ${build_cache}/target/product/${model_name}/boot.img ${build_out}/$1/twrp-$1.img
 
@@ -57,11 +31,15 @@ function build_omniROM_twrp() {
     echo "####OmniROM TWRP BUILD END####"
 }
 
+# exit script immediately if a command fails
+set -e
+
 echo "Are the template files up-to-date?"
 echo "IS THIS SHELL IN THE REPOSITORY? Or did you modify the current_dir variable?"
 read -n1 -r -p "Press space to continue..."
 
-source ../../../../TOOLS/functions.sh
+source ../../../../TOOLS/functions.sh # Functions for every script
+source ../../functions.sh # Functions for every TWRP script
 
 functions_init
 
