@@ -249,7 +249,7 @@ functions_clean_builds ${build_out}/xz3
 
 echo "Output ${build_out}"
 read -n1 -r -p "Press space to continue..."
-echo "Upload to androgidfilehost.com !"
+echo "Upload to androidfilehost.com !"
 read -n1 -r -p "Press space to continue..."
 echo "Upload to dhacke strato server !"
 read -n1 -r -p "Press space to continue..."
