@@ -22,9 +22,14 @@ if [[ "$touch_id" == "3" ]] || [[ "$touch_id" == "4" ]]; then
     cp /v/lib/modules/clearpad_core.ko /sbin/
     cp /v/lib/modules/clearpad_i2c.ko /sbin/
 
+    chmod +x /sbin/clearpad_rmi_dev.ko
+    chmod +x /sbin/clearpad_core.ko
+    chmod +x /sbin/clearpad_i2c.ko
+
     insmod /sbin/clearpad_rmi_dev.ko
     insmod /sbin/clearpad_core.ko
     insmod /sbin/clearpad_i2c.ko
+
     echo 1 > /sys/devices/virtual/input/clearpad/post_probe_start
 fi
 
@@ -38,6 +43,15 @@ if [[ "$touch_id" == "7" ]] || [[ "$touch_id" == "8" ]]; then
     cp /v/lib/modules/synaptics_tcm_reflash.ko /sbin/
     cp /v/lib/modules/synaptics_tcm_recovery.ko /sbin/
     cp /v/lib/modules/synaptics_tcm_diagnostics.ko /sbin/
+
+    chmod +x /sbin/synaptics_tcm_i2c.ko
+    chmod +x /sbin/synaptics_tcm_core.ko
+    chmod +x /sbin/synaptics_tcm_touch.ko
+    chmod +x /sbin/synaptics_tcm_device.ko
+    chmod +x /sbin/synaptics_tcm_testing.ko
+    chmod +x /sbin/synaptics_tcm_reflash.ko
+    chmod +x /sbin/synaptics_tcm_recovery.ko
+    chmod +x /sbin/synaptics_tcm_diagnostics.ko
 
     insmod /sbin/synaptics_tcm_i2c.ko
     insmod /sbin/synaptics_tcm_core.ko
@@ -54,8 +68,12 @@ if [[ "$touch_id" == "9" ]]; then
     cp /v/lib/modules/ssw49501.ko /sbin/
     cp /v/lib/modules/ssw_mon.ko /sbin/
 
+    chmod +x /sbin/ssw49501.ko
+    chmod +x /sbin/ssw_mon.ko
+
     insmod /sbin/ssw49501.ko
     insmod /sbin/ssw_mon.ko
+
     echo 1 > /sys/devices/virtual/input/siw_touch_input/init_late_session
 fi
 
@@ -63,7 +81,10 @@ fi
 if [[ "$touch_id" == "akatsuki default" ]] || [[ "$touch_id" == "5" ]]; then
     cp /v/lib/modules/atmel_mxt640u.ko /sbin/
 
+    chmod +x /sbin/atmel_mxt640u.ko
+
     insmod /sbin/atmel_mxt640u.ko
+
     echo 1 > /sys/devices/virtual/input/lge_touch/charge_out
 fi
 
