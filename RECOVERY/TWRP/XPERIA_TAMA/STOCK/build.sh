@@ -12,7 +12,7 @@ function set_variables() {
     build_cache_stock_kernel=/media/martin/extLinux/developer/android/cache/twrp/stock/10/stockKernelBinary
     current_dir_tools_aik=/media/martin/extLinux/developer/android/tools/Android-Image-Kitchen
     stock_kernel_dir=/home/developer/android/MartinX3-AndroidDevelopment/sonyxperiadev-KERNEL_SONY_XPERIA_STOCK
-    stock_version_number=52.1.A.0.618
+    stock_version_number=52.1.A.0.672
     echo "####SET VARIABLES END####"
 }
 
