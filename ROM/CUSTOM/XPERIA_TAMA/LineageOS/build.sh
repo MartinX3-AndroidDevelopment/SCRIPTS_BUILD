@@ -19,17 +19,6 @@ function add_custom_hacks() {
     # Executing the LineageOS patches
     cd ${customROM_dir}
     bash ${customROM_dir}/repo_update.sh
-    echo "####Executing LineageOS repo_update.sh END####"
-
-    #TODO Remove it togeter with build-in gapps
-    echo "####WORKAROUND Update Opengapps LFS storage START####"
-    cd ${customROM_dir}/vendor/opengapps/sources/all
-    git lfs pull
-    cd ${customROM_dir}/vendor/opengapps/sources/arm
-    git lfs pull
-    cd ${customROM_dir}/vendor/opengapps/sources/arm64
-    git lfs pull
-    echo "####WORKAROUND Update Opengapps LFS storage END####"
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
@@ -42,33 +31,15 @@ function build_lineageOS() {
     case "$1" in
         "XZ2_SS")
             product_name=akari
-            dualsim=false
-            lunch lineage_akari_RoW-userdebug
+            breakfast lineage_akari_RoW-userdebug # using LineageOS specific breakfast instead of lunch
         ;;
         "XZ2C_SS")
             product_name=apollo
-            dualsim=false
-            lunch lineage_apollo_RoW-userdebug
+            breakfast lineage_apollo_RoW-userdebug # using LineageOS specific breakfast instead of lunch
         ;;
         "XZ3_SS")
             product_name=akatsuki
-            dualsim=false
-            lunch lineage_akatsuki_RoW-userdebug
-        ;;
-        "XZ2_DS")
-            product_name=akari
-            dualsim=true
-            lunch lineage_akari_DSDS-userdebug
-        ;;
-        "XZ2C_DS")
-            product_name=apollo
-            dualsim=true
-            lunch lineage_apollo_DSDS-userdebug
-        ;;
-        "XZ3_DS")
-            product_name=akatsuki
-            dualsim=true
-            lunch lineage_akatsuki_DSDS-userdebug
+            breakfast lineage_akatsuki_RoW-userdebug # using LineageOS specific breakfast instead of lunch
         ;;
         *)
             echo "Unknown Option $1 in build_lineageOS()"
@@ -77,17 +48,9 @@ function build_lineageOS() {
 
     make installclean # Clean build while saving the buildcache.
 
-    if ${dualsim}; then
-        partitions="boot vendor"
-        make -j$((`nproc`+1)) bootimage vendorimage
-    else
-        partitions="boot dtbo system userdata vbmeta vendor"
-        make -j$((`nproc`+1))
-    fi
+    mka -j$((`nproc`+1)) bacon # mka "Builds using SCHED_BATCH on all processors." and bacon creates a flashable zip
 
-    for partition in ${partitions}; do
-        cp ${build_cache}/target/product/${product_name}/${partition}.img ${build_out}/$1/
-    done
+    cp ${build_cache}/target/product/${product_name}/lineage-*.zip ${build_out}/ # Only the correct file gets found with "lineage-*.zip"
     echo "####$1 Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
@@ -106,46 +69,16 @@ set_variables
 
 functions_create_folders ${build_cache}
 functions_create_folders ${build_out}
-functions_create_folders ${build_out}/XZ2_SS
-functions_create_folders ${build_out}/XZ2C_SS
-functions_create_folders ${build_out}/XZ3_SS
-functions_create_folders ${build_out}/XZ2_DS
-functions_create_folders ${build_out}/XZ2C_DS
-functions_create_folders ${build_out}/XZ3_DS
 
 functions_test_repo_up_to_date
-
-functions_clean_builds ${build_out}/XZ2_SS
-functions_clean_builds ${build_out}/XZ2C_SS
-functions_clean_builds ${build_out}/XZ3_SS
-functions_clean_builds ${build_out}/XZ2_DS
-functions_clean_builds ${build_out}/XZ2C_DS
-functions_clean_builds ${build_out}/XZ3_DS
 
 functions_update_customROM ${customROM_dir}
 
 add_custom_hacks
 
 build_lineageOS XZ2_SS
-build_lineageOS XZ2_DS
 build_lineageOS XZ2C_SS
-build_lineageOS XZ2C_DS
 build_lineageOS XZ3_SS
-build_lineageOS XZ3_DS
-
-functions_compress_builds ${build_out}/XZ2_SS lineageOS_XZ2_SS
-functions_compress_builds ${build_out}/XZ2C_SS lineageOS_XZ2C_SS
-functions_compress_builds ${build_out}/XZ3_SS lineageOS_XZ3_SS
-functions_compress_builds ${build_out}/XZ2_DS lineageOS_XZ2_DS
-functions_compress_builds ${build_out}/XZ2C_DS lineageOS_XZ2C_DS
-functions_compress_builds ${build_out}/XZ3_DS lineageOS_XZ3_DS
-
-functions_clean_builds ${build_out}/XZ2_SS
-functions_clean_builds ${build_out}/XZ2C_SS
-functions_clean_builds ${build_out}/XZ3_SS
-functions_clean_builds ${build_out}/XZ2_DS
-functions_clean_builds ${build_out}/XZ2C_DS
-functions_clean_builds ${build_out}/XZ3_DS
 
 echo "Output ${build_out}"
 read -n1 -r -p "Press space to continue..."
