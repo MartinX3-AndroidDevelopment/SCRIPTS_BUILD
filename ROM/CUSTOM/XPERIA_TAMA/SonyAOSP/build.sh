@@ -31,34 +31,16 @@ function build_sonyAOSP() {
     echo "####$1 Sim START####"
     case "$1" in
         "XZ2_SS")
-            product_name=akari
-            dualsim=false
-            lunch aosp_h8216-userdebug
+            product_name=aosp_h8216
+            lunch ${product_name}-userdebug
         ;;
         "XZ2C_SS")
-            product_name=apollo
-            dualsim=false
-            lunch aosp_h8314-userdebug
+            product_name=aosp_h8314
+            lunch ${product_name}-userdebug
         ;;
         "XZ3_SS")
-            product_name=akatsuki
-            dualsim=false
-            lunch aosp_h8416-userdebug
-        ;;
-        "XZ2_DS")
-            product_name=akari
-            dualsim=true
-            lunch aosp_h8266-userdebug
-        ;;
-        "XZ2C_DS")
-            product_name=apollo
-            dualsim=true
-            lunch aosp_h8324-userdebug
-        ;;
-        "XZ3_DS")
-            product_name=akatsuki
-            dualsim=true
-            lunch aosp_h9436-userdebug
+            product_name=aosp_h8416
+            lunch ${product_name}-userdebug
         ;;
         *)
             echo "Unknown Option $1 in build_sonyAOSP()"
@@ -67,17 +49,9 @@ function build_sonyAOSP() {
 
     make installclean # Clean build while saving the buildcache.
 
-    if ${dualsim}; then
-        partitions="boot vendor"
-        make -j$((`nproc`+1)) bootimage vendorimage
-    else
-        partitions="boot dtbo system userdata vbmeta vendor"
-        make -j$((`nproc`+1))
-    fi
+    make -j$((`nproc`+1)) dist
 
-    for partition in ${partitions}; do
-        cp ${build_cache}/target/product/${product_name}/${partition}.img ${build_out}/$1/
-    done
+    cp ${build_cache}/dist/${product_name}-ota-eng.martin.zip ${build_out}/$(date +%Y-%m-%d_%H-%M-%S)_sonyAOSP_$1.zip
     echo "####$1 Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
@@ -96,46 +70,16 @@ set_variables
 
 functions_create_folders ${build_cache}
 functions_create_folders ${build_out}
-functions_create_folders ${build_out}/XZ2_SS
-functions_create_folders ${build_out}/XZ2C_SS
-functions_create_folders ${build_out}/XZ3_SS
-functions_create_folders ${build_out}/XZ2_DS
-functions_create_folders ${build_out}/XZ2C_DS
-functions_create_folders ${build_out}/XZ3_DS
 
 functions_test_repo_up_to_date
-
-functions_clean_builds ${build_out}/XZ2_SS
-functions_clean_builds ${build_out}/XZ2C_SS
-functions_clean_builds ${build_out}/XZ3_SS
-functions_clean_builds ${build_out}/XZ2_DS
-functions_clean_builds ${build_out}/XZ2C_DS
-functions_clean_builds ${build_out}/XZ3_DS
 
 functions_update_customROM ${customROM_dir}
 
 add_custom_hacks
 
 build_sonyAOSP XZ2_SS
-build_sonyAOSP XZ2_DS
 build_sonyAOSP XZ2C_SS
-build_sonyAOSP XZ2C_DS
 build_sonyAOSP XZ3_SS
-build_sonyAOSP XZ3_DS
-
-functions_compress_builds ${build_out}/XZ2_SS sonyAOSP_XZ2_SS
-functions_compress_builds ${build_out}/XZ2C_SS sonyAOSP_XZ2C_SS
-functions_compress_builds ${build_out}/XZ3_SS sonyAOSP_XZ3_SS
-functions_compress_builds ${build_out}/XZ2_DS sonyAOSP_XZ2_DS
-functions_compress_builds ${build_out}/XZ2C_DS sonyAOSP_XZ2C_DS
-functions_compress_builds ${build_out}/XZ3_DS sonyAOSP_XZ3_DS
-
-functions_clean_builds ${build_out}/XZ2_SS
-functions_clean_builds ${build_out}/XZ2C_SS
-functions_clean_builds ${build_out}/XZ3_SS
-functions_clean_builds ${build_out}/XZ2_DS
-functions_clean_builds ${build_out}/XZ2C_DS
-functions_clean_builds ${build_out}/XZ3_DS
 
 echo "Output ${build_out}"
 read -n1 -r -p "Press space to continue..."
