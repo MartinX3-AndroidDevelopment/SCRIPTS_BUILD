@@ -16,15 +16,15 @@ function functions_build_omniROM_twrp() {
 
     case "$1" in
         "xz2")
-            model_name=akari
+            export model_name=akari
             lunch omni_akari-eng
         ;;
         "xz2c")
-            model_name=apollo
+            export model_name=apollo
             lunch omni_apollo-eng
         ;;
         "xz3")
-            model_name=akatsuki
+            export model_name=akatsuki
             lunch omni_akatsuki-eng
         ;;
         *)
