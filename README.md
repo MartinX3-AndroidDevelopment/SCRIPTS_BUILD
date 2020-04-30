@@ -13,5 +13,5 @@ Buildscripts for the projects
 - ROM
   - CUSTOM
     - XPERIA_TAMA
-      - [SonyAOSP](ROM/CUSTOM/XPERIA_TAMA/SonyAOSP/README.md)
-      - [LineageOS](ROM/CUSTOM/XPERIA_TAMA/LineageOS/README.md)
+      - [SonyAOSP](ROM/SODP/XPERIA_TAMA/SonyAOSP/README.md)
+      - [LineageOS](ROM/SODP/XPERIA_TAMA/LineageOS/README.md)
