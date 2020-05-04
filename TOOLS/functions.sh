@@ -63,7 +63,7 @@ function functions_update_customROM() {
 
     # Executing the special project updates.
     # Skiping the repo sync here, since we already did it.
-    bash SKIP_SYNC=TRUE repo_update.sh
+    SKIP_SYNC=TRUE repo_update.sh
     echo "####CustomROM UPDATE END####"
 }
 
