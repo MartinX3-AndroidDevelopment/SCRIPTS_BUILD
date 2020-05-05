@@ -11,7 +11,7 @@ Buildscripts for the projects
       - [SODP AOSP](RECOVERY/TWRP/XPERIA_TAMA/SODP/README.md)
       - [STOCK](RECOVERY/TWRP/XPERIA_TAMA/STOCK/README.md)
 - ROM
-  - CUSTOM
+  - SODP
     - XPERIA_TAMA
       - [SonyAOSP](ROM/SODP/XPERIA_TAMA/SonyAOSP/README.md)
       - [LineageOS](ROM/SODP/XPERIA_TAMA/LineageOS/README.md)
