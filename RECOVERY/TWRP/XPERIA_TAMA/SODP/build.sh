@@ -8,7 +8,7 @@ function set_variables() {
     echo "####SET VARIABLES START####"
     functions_set_variables
     build_out=/media/martin/extLinux/developer/android/out/twrp/sodp/10
-    PLATFORM_SECURITY_PATCH_OVERRIDE=2020-04-05
+    PLATFORM_SECURITY_PATCH_OVERRIDE=2020-05-05
     echo "####SET VARIABLES END####"
 }
 
