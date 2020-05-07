@@ -13,6 +13,7 @@ function set_variables() {
     current_dir_tools_aik=/media/martin/extLinux/developer/android/tools/Android-Image-Kitchen
     stock_kernel_dir=/home/developer/android/MartinX3-AndroidDevelopment/sonyxperiadev-KERNEL_SONY_XPERIA_STOCK
     stock_version_number=52.1.A.0.672
+    PLATFORM_SECURITY_PATCH_OVERRIDE=2020-03-05
     echo "####SET VARIABLES END####"
 }
 
@@ -25,7 +26,7 @@ function add_custom_hacks() {
 function build_omniROM_twrp() {
     echo "####OmniROM TWRP BUILD START####"
     echo "####$1 START####"
-    functions_build_omniROM_twrp $1 true # TW_IS_FOR_STOCK=true
+    functions_build_omniROM_twrp $1 ${PLATFORM_SECURITY_PATCH_OVERRIDE}  # OmniROM 9.0 doesn't get new security patch level. Stock is one month behind.
 
     yes | cp -rf ${build_cache}/target/product/${model_name}/boot.img ${build_cache_SODP_TWRP}/$1/
     echo "####$1 END####"

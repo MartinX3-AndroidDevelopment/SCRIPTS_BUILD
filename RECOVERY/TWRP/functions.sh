@@ -34,5 +34,5 @@ function functions_build_omniROM_twrp() {
 
     make installclean # Clean build while saving the buildcache.
 
-    make -j$((`nproc` - 1)) bootimage TW_IS_FOR_STOCK=$2
+    make -j$((`nproc` - 1)) bootimage PLATFORM_SECURITY_PATCH_OVERRIDE=$2
 }

@@ -8,6 +8,7 @@ function set_variables() {
     echo "####SET VARIABLES START####"
     functions_set_variables
     build_out=/media/martin/extLinux/developer/android/out/twrp/sodp/10
+    PLATFORM_SECURITY_PATCH_OVERRIDE=2020-04-05
     echo "####SET VARIABLES END####"
 }
 
@@ -20,7 +21,7 @@ function add_custom_hacks() {
 function build_omniROM_twrp() {
     echo "####OmniROM TWRP BUILD START####"
     echo "####$1 START####"
-    functions_build_omniROM_twrp $1 false # TW_IS_FOR_STOCK=false
+    functions_build_omniROM_twrp $1 ${PLATFORM_SECURITY_PATCH_OVERRIDE} # OmniROM 9.0 doesn't get new security patch level.
 
     yes | cp -rf ${build_cache}/target/product/${model_name}/boot.img ${build_out}/$1/twrp-$1.img
 
