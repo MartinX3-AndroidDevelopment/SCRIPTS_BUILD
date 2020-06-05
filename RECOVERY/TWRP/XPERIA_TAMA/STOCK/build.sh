@@ -46,11 +46,11 @@ function update_stock_kernel_repo() {
     cd ${stock_kernel_dir}
     if [[ ! -d .git ]]
     then
-        git clone https://github.com/MartinX3-AndroidDevelopment/sonyxperiadev-KERNEL_SONY_XPERIA_STOCK.git -b ${stock_version_number} .
+        git clone https://github.com/MartinX3-AndroidDevelopment/sonyxperiadev-KERNEL_SONY_XPERIA_STOCK.git -b tama .
     else
         git reset --hard
         git pull
-        git checkout ${stock_version_number}
+        git checkout tama
     fi
     echo "####STOCK KERNEL REPO UPDATE END####"
 }
