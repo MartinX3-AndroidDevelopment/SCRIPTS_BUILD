@@ -167,8 +167,8 @@ function build_stockROM_twrp() {
     echo "####Stock TWRP $1 BUILD END####"
 }
 
-# exit script immediately if a command fails
-set -e
+# exit script immediately if a command fails or a variable is unset
+set -eu
 
 echo "Did you set the correct stock version number?"
 echo "Did you update the stock firmware files?"
@@ -252,5 +252,7 @@ echo "Upload to androidfilehost.com !"
 read -n1 -r -p "Press space to continue..."
 echo "Upload to dhacke strato server !"
 read -n1 -r -p "Press space to continue..."
+
+set +eu
 
 exit 0
