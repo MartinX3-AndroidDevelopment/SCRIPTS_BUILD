@@ -52,8 +52,8 @@ function build_lineageOS() {
     echo "####SONY AOSP BUILD END####"
 }
 
-# exit script immediately if a command fails
-set -e
+# exit script immediately if a command fails or a variable is unset
+set -eu
 
 echo "IS THIS SHELL IN THE REPOSITORY? Or did you modify the current_dir variable?"
 read -n1 -r -p "Press space to continue..."
@@ -84,8 +84,6 @@ read -n1 -r -p "Press space to continue..."
 echo "Upload to dhacke strato server !"
 read -n1 -r -p "Press space to continue..."
 
-# because "set -e" is used above, when we get to this point, we know
-# everything worked fine.
-set +e
+set +eu
 
 exit 0
