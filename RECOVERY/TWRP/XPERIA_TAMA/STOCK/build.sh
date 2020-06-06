@@ -6,36 +6,41 @@
 
 function set_variables() {
     echo "####SET VARIABLES START####"
-    functions_set_variables
-    build_out=/media/martin/extLinux/developer/android/out/twrp/stock/10
-    build_cache_SODP_TWRP=/media/martin/extLinux/developer/android/cache/twrp/stock/10/SODP_TWRP
-    build_cache_stock_kernel=/media/martin/extLinux/developer/android/cache/twrp/stock/10/stockKernelBinary
-    current_dir_tools_aik=/media/martin/extLinux/developer/android/tools/Android-Image-Kitchen
-    stock_kernel_dir=/home/developer/android/MartinX3-AndroidDevelopment/sonyxperiadev-KERNEL_SONY_XPERIA_STOCK
+    android_code_folder=/home/developer/android
+    android_stuff_folder=/media/martin/extLinux/developer/android # A shiny variable name, isn't it?
+    android_stuff_folder_cache=${android_stuff_folder}/cache
+    android_stuff_folder_cache_twrp=${android_stuff_folder_cache}/twrp/stock/10
+    build_cache_customROM=${android_stuff_folder_cache}/twrp_omni_minimal/9 #CustomROM out dir
+    build_out=${android_stuff_folder}/out/twrp/stock/10
+    build_cache_SODP_TWRP=${android_stuff_folder_cache_twrp}/SODP_TWRP
+    build_cache_stock_kernel=${android_stuff_folder_cache_twrp}/stockKernelBinary
+    current_dir=$(pwd)
+    current_dir_tools_aik=${android_stuff_folder}/tools/Android-Image-Kitchen
+    customROM_dir=${android_code_folder}/rom/platform_manifest_twrp_omni_android_9.0
+    stock_kernel_dir=${android_code_folder}/MartinX3-AndroidDevelopment/sonyxperiadev-KERNEL_SONY_XPERIA_STOCK
     stock_version_number=52.1.A.0.672
-    PLATFORM_SECURITY_PATCH_OVERRIDE=2020-03-05
+    PLATFORM_SECURITY_PATCH_OVERRIDE=2020-03-05 # OmniROM 9.0 doesn't get new security patch level. Stock is one month behind.
     echo "####SET VARIABLES END####"
 }
 
 function add_custom_hacks() {
     echo "####CUSTOMROM HACKS ADDING START####"
-    cd ${customROM_dir}
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
 function build_omniROM_twrp() {
     echo "####OmniROM TWRP BUILD START####"
     echo "####$1 START####"
-    functions_build_omniROM_twrp $1 ${PLATFORM_SECURITY_PATCH_OVERRIDE}  # OmniROM 9.0 doesn't get new security patch level. Stock is one month behind.
+    functions_twrp_build_customROM_helper ${customROM_dir} $1 ${PLATFORM_SECURITY_PATCH_OVERRIDE}
 
-    yes | cp -rf ${build_cache}/target/product/${model_name}/boot.img ${build_cache_SODP_TWRP}/$1/
+    yes | cp -rf ${build_cache_customROM}/target/product/$1/boot.img ${build_cache_SODP_TWRP}/$1/
     echo "####$1 END####"
 
     case "$1" in
-        "xz2")
-            echo "####XZ2P START####"
-            yes | cp -rf ${build_cache}/target/product/${model_name}/boot.img ${build_cache_SODP_TWRP}/xz2p/
-            echo "####XZ2P END####"
+        "akari")
+            echo "####Aurora START####"
+            yes | cp -rf ${build_cache_customROM}/target/product/$1/boot.img ${build_cache_SODP_TWRP}/aurora/
+            echo "####Aurora END####"
         ;;
     esac
     echo "####OmniROM TWRP BUILD END####"
@@ -73,23 +78,7 @@ function build_stockROM_kernel() {
     boot_img_kernel_name=${boot_img_name}-zImage
 
     echo "####$1 START####"
-    case "$1" in
-        "xz2")
-            export KBUILD_DIFFCONFIG=akari_diffconfig
-        ;;
-        "xz2p")
-            export KBUILD_DIFFCONFIG=aurora_diffconfig
-        ;;
-        "xz2c")
-            export KBUILD_DIFFCONFIG=apollo_diffconfig
-        ;;
-        "xz3")
-            export KBUILD_DIFFCONFIG=akatsuki_diffconfig
-        ;;
-        *)
-            echo "Unknown Option $1 in build_stockROM_kernel()"
-            exit 1 # die with error code 9999
-    esac
+    export KBUILD_DIFFCONFIG=$1_diffconfig
 
     if [[ ! -f ${build_cache_stock_kernel}/$1/${boot_img_kernel_name} ]]; then
         make mrproper && make clean && rm -rf ./out
@@ -134,25 +123,12 @@ function build_stockROM_twrp() {
     # copy the self compiled stock kernel with merged dtbo
     yes | cp -rf ${build_cache_stock_kernel}/$1/${boot_img_kernel_name} ${current_dir_tools_aik}/split_img/${boot_img_kernel_name}
 
-    case "$1" in
-        "xz2")
-            model_name=akari
-        ;;
-        "xz2p")
-            model_name=akari # we're using the akari aosp file
-        ;;
-        "xz2c")
-            model_name=apollo
-        ;;
-        "xz3")
-            model_name=akatsuki
-        ;;
-        *)
-            echo "Unknown Option $1 in build_stockROM_twrp()"
-            exit 1 # die with error code 9999
-    esac
     # workaround -> on stock rom # [ro.boot.hardware]: [qcom] # [ro.hardware]: [qcom]
     # on aosp / custom rom (example) # [ro.boot.hardware]: [akari] # [ro.hardware]: [akari]
+    model_name=$1
+    if [[ "$1" == "aurora" ]]; then
+        model_name=akari
+    fi
     cp ${current_dir_tools_aik}/ramdisk/init.recovery.${model_name}.rc ${current_dir_tools_aik}/ramdisk/init.recovery.qcom.rc
 
     # repack to create the stock twrp boot.img
@@ -163,6 +139,7 @@ function build_stockROM_twrp() {
     bash ${current_dir_tools_aik}/cleanup.sh
     echo "####TWRP.img END####"
 
+    # Copy the template files into the output folder to get bundled
     yes | cp -rf ${current_dir}/../template/*.* ${build_out}/$1/
     echo "####Stock TWRP $1 BUILD END####"
 }
@@ -184,67 +161,67 @@ functions_init
 
 set_variables
 
-functions_create_folders ${build_cache}
+functions_create_folders ${build_cache_customROM}
 functions_create_folders ${build_cache_stock_kernel}
-functions_create_folders ${build_cache_stock_kernel}/xz2
-functions_create_folders ${build_cache_stock_kernel}/xz2p
-functions_create_folders ${build_cache_stock_kernel}/xz2c
-functions_create_folders ${build_cache_stock_kernel}/xz3
+functions_create_folders ${build_cache_stock_kernel}/akari
+functions_create_folders ${build_cache_stock_kernel}/aurora
+functions_create_folders ${build_cache_stock_kernel}/apollo
+functions_create_folders ${build_cache_stock_kernel}/akatsuki
 functions_create_folders ${build_cache_SODP_TWRP}
-functions_create_folders ${build_cache_SODP_TWRP}/xz2
-functions_create_folders ${build_cache_SODP_TWRP}/xz2p
-functions_create_folders ${build_cache_SODP_TWRP}/xz2c
-functions_create_folders ${build_cache_SODP_TWRP}/xz3
+functions_create_folders ${build_cache_SODP_TWRP}/akari
+functions_create_folders ${build_cache_SODP_TWRP}/aurora
+functions_create_folders ${build_cache_SODP_TWRP}/apollo
+functions_create_folders ${build_cache_SODP_TWRP}/akatsuki
 functions_create_folders ${build_out}
-functions_create_folders ${build_out}/xz2
-functions_create_folders ${build_out}/xz2p
-functions_create_folders ${build_out}/xz2c
-functions_create_folders ${build_out}/xz3
+functions_create_folders ${build_out}/akari
+functions_create_folders ${build_out}/aurora
+functions_create_folders ${build_out}/apollo
+functions_create_folders ${build_out}/akatsuki
 
 functions_test_repo_up_to_date
 
-functions_clean_builds ${build_cache_stock_kernel}/xz2
-functions_clean_builds ${build_cache_stock_kernel}/xz2p
-functions_clean_builds ${build_cache_stock_kernel}/xz2c
-functions_clean_builds ${build_cache_stock_kernel}/xz3
-functions_clean_builds ${build_out}/xz2
-functions_clean_builds ${build_out}/xz2p
-functions_clean_builds ${build_out}/xz2c
-functions_clean_builds ${build_out}/xz3
+functions_twrp_clean_builds ${build_cache_stock_kernel}/akari
+functions_twrp_clean_builds ${build_cache_stock_kernel}/aurora
+functions_twrp_clean_builds ${build_cache_stock_kernel}/apollo
+functions_twrp_clean_builds ${build_cache_stock_kernel}/akatsuki
+functions_twrp_clean_builds ${build_out}/akari
+functions_twrp_clean_builds ${build_out}/aurora
+functions_twrp_clean_builds ${build_out}/apollo
+functions_twrp_clean_builds ${build_out}/akatsuki
 
 functions_update_customROM ${customROM_dir}
 
 add_custom_hacks
 
-build_omniROM_twrp xz2 # Includes xz2p
-build_omniROM_twrp xz2c
-build_omniROM_twrp xz3
+build_omniROM_twrp akari # xz2 includes aurora/xz2p
+build_omniROM_twrp apollo # xz2c
+build_omniROM_twrp akatsuki # xz3
 
 update_stock_kernel_repo
 
-build_stockROM_kernel xz2
-build_stockROM_kernel xz2p
-build_stockROM_kernel xz2c
-build_stockROM_kernel xz3
+build_stockROM_kernel akari
+build_stockROM_kernel aurora
+build_stockROM_kernel apollo
+build_stockROM_kernel akatsuki
 
-build_stockROM_twrp xz2
-build_stockROM_twrp xz2p
-build_stockROM_twrp xz2c
-build_stockROM_twrp xz3
+build_stockROM_twrp akari
+build_stockROM_twrp aurora
+build_stockROM_twrp apollo
+build_stockROM_twrp akatsuki
 
-functions_compress_builds ${build_out}/xz2 twrp_stock_xz2_${stock_version_number}
-functions_compress_builds ${build_out}/xz2p twrp_stock_xz2p_${stock_version_number}
-functions_compress_builds ${build_out}/xz2c twrp_stock_xz2c_${stock_version_number}
-functions_compress_builds ${build_out}/xz3 twrp_stock_xz3_${stock_version_number}
+functions_twrp_compress_builds ${build_out}/akari twrp_stock_akari_${stock_version_number}
+functions_twrp_compress_builds ${build_out}/aurora twrp_stock_aurora_${stock_version_number}
+functions_twrp_compress_builds ${build_out}/apollo twrp_stock_apollo_${stock_version_number}
+functions_twrp_compress_builds ${build_out}/akatsuki twrp_stock_akatsuki_${stock_version_number}
 
-functions_clean_builds ${build_cache_stock_kernel}/xz2
-functions_clean_builds ${build_cache_stock_kernel}/xz2p
-functions_clean_builds ${build_cache_stock_kernel}/xz2c
-functions_clean_builds ${build_cache_stock_kernel}/xz3
-functions_clean_builds ${build_out}/xz2
-functions_clean_builds ${build_out}/xz2p
-functions_clean_builds ${build_out}/xz2c
-functions_clean_builds ${build_out}/xz3
+functions_twrp_clean_builds ${build_cache_stock_kernel}/akari
+functions_twrp_clean_builds ${build_cache_stock_kernel}/aurora
+functions_twrp_clean_builds ${build_cache_stock_kernel}/apollo
+functions_twrp_clean_builds ${build_cache_stock_kernel}/akatsuki
+functions_twrp_clean_builds ${build_out}/akari
+functions_twrp_clean_builds ${build_out}/aurora
+functions_twrp_clean_builds ${build_out}/apollo
+functions_twrp_clean_builds ${build_out}/akatsuki
 
 echo "Output ${build_out}"
 read -n1 -r -p "Press space to continue..."

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (c) 2019 Martin Dünkelmann
+# Copyright (c) 2019-2020 Martin Dünkelmann
 # All rights reserved.
 #
 
@@ -70,16 +70,13 @@ function functions_update_customROM() {
     echo "####CustomROM UPDATE END####"
 }
 
-function functions_compress_builds() {
-    echo "####COMPRESSING $1 BUILD START####"
+function functions_build_customROM_helper() {
     cd $1
-    tar -zcvf $1/../$(date +%Y-%m-%d_%H-%M-%S)_$2.tar.gz *
-    echo "####COMPRESSING $1 BUILD END####"
-}
+    set +u
+    source $1/build/envsetup.sh
+    set -u
 
-function functions_clean_builds() {
-    echo "####CLEANING $1 BUILD START####"
-    rm -f $1/*
-    echo "####CLEANING $1 BUILD END####"
-}
+    lunch $2
 
+    make installclean # Clean build while saving the buildcache.
+}

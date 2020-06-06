@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (c) 2019 Martin Dünkelmann
+# Copyright (c) 2019-2020 Martin Dünkelmann
 # All rights reserved.
 #
 
@@ -20,35 +20,14 @@ function add_custom_hacks() {
 
 function build_sonyAOSP() {
     echo "####SONY AOSP BUILD START####"
-    cd ${customROM_dir}
-    set +u
-    source ${customROM_dir}/build/envsetup.sh
-    set -u
-
     echo "####$1 Sim START####"
-    case "$1" in
-        "XZ2_SS")
-            product_name=aosp_h8216
-            lunch ${product_name}-userdebug
-        ;;
-        "XZ2C_SS")
-            product_name=aosp_h8314
-            lunch ${product_name}-userdebug
-        ;;
-        "XZ3_SS")
-            product_name=aosp_h8416
-            lunch ${product_name}-userdebug
-        ;;
-        *)
-            echo "Unknown Option $1 in build_sonyAOSP()"
-            exit 1 # die with error code 9999
-    esac
+    functions_build_customROM_helper ${customROM_dir} $1-userdebug
 
-    make installclean # Clean build while saving the buildcache.
+    cd ${customROM_dir}
 
-    make -j$((`nproc`+1)) dist
+    make -j$(nproc --all) dist # mka "Builds using SCHED_BATCH on all processors." and dist creates a flashable zip
 
-    cp ${build_cache}/dist/${product_name}-ota-eng.martin.zip ${build_out}/$(date +%Y-%m-%d_%H-%M-%S)_sonyAOSP_$1.zip
+    cp ${build_cache}/dist/$1-ota-eng.martin.zip ${build_out}/$(date +%Y-%m-%d_%H-%M-%S)_sonyAOSP_$1.zip
     echo "####$1 Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
@@ -74,9 +53,9 @@ functions_update_customROM ${customROM_dir}
 
 add_custom_hacks
 
-build_sonyAOSP XZ2_SS
-build_sonyAOSP XZ2C_SS
-build_sonyAOSP XZ3_SS
+build_sonyAOSP aosp_h8216 # XZ2_SS
+build_sonyAOSP aosp_h8314 # XZ2C_SS
+build_sonyAOSP aosp_h8416 # XZ3_SS
 
 echo "Output ${build_out}"
 read -n1 -r -p "Press space to continue..."
