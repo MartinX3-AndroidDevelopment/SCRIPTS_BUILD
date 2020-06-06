@@ -33,7 +33,7 @@ function build_omniROM_twrp() {
 }
 
 # exit script immediately if a command fails or a variable is unset
-set -eu
+set -e
 
 echo "Are the template files up-to-date?"
 echo "IS THIS SHELL IN THE REPOSITORY? Or did you modify the current_dir variable?"
@@ -81,6 +81,6 @@ read -n1 -r -p "Press space to continue..."
 echo "Upload to dhacke strato server !"
 read -n1 -r -p "Press space to continue..."
 
-set +eu
+set +e
 
 exit 0
