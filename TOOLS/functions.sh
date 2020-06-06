@@ -37,6 +37,7 @@ function functions_test_repo_up_to_date() {
 
     if [[ ${LOCAL} = ${REMOTE} ]]; then
         echo "Git repo is up-to-date!"
+        git prune # Remove unneeded elements to save space and time.
     elif [[ ${LOCAL} = ${BASE} ]]; then
         echo "Git repo not up to date!"
         read -n1 -r -p "Press space to continue..."
@@ -60,6 +61,7 @@ function functions_update_customROM() {
     cd $1
     repo forall -vc "git reset --hard"
     repo sync --force-sync -j32
+    repo prune # Remove unneeded elements to save space and time.
 
     # Executing the special project updates.
     # Skiping the repo sync here, since we already did it.
