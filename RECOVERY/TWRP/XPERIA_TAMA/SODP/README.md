@@ -25,7 +25,7 @@ All rights reserved.
 - Download the code into the device repos created above:
     ```bash
     cd minimal-manifest-twrp_OmniROM
-    repo sync -j$((`nproc`));
+    repo sync -j$(nproc --all);
     ```
 - Build the TWRP bootimage ("-eng" build)
     ```bash

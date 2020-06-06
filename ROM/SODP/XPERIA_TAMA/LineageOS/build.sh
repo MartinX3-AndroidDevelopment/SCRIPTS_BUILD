@@ -15,41 +15,19 @@ function set_variables() {
 
 function add_custom_hacks() {
     echo "####CUSTOMROM HACKS ADDING START####"
-    cd ${customROM_dir}
     echo "####CUSTOMROM HACKS ADDING END####"
 }
 
 function build_lineageOS() {
     echo "####SONY AOSP BUILD START####"
-    cd ${customROM_dir}
-    set +u
-    source ${customROM_dir}/build/envsetup.sh
-    set -u
-
     echo "####$1 Sim START####"
-    case "$1" in
-        "XZ2_SS")
-            product_name=akari
-            breakfast lineage_akari_RoW-userdebug # using LineageOS specific breakfast instead of lunch
-        ;;
-        "XZ2C_SS")
-            product_name=apollo
-            breakfast lineage_apollo_RoW-userdebug # using LineageOS specific breakfast instead of lunch
-        ;;
-        "XZ3_SS")
-            product_name=akatsuki
-            breakfast lineage_akatsuki_RoW-userdebug # using LineageOS specific breakfast instead of lunch
-        ;;
-        *)
-            echo "Unknown Option $1 in build_lineageOS()"
-            exit 1 # die with error code 9999
-    esac
+    functions_build_customROM_helper ${customROM_dir} lineage_$1_RoW-userdebug
 
-    make installclean # Clean build while saving the buildcache.
+    cd ${customROM_dir}
 
-    mka -j$((`nproc`+1)) bacon # mka "Builds using SCHED_BATCH on all processors." and bacon creates a flashable zip
+    mka bacon # mka "Builds using SCHED_BATCH on all processors. -j$(nproc --all) is not needed here." and bacon creates a flashable zip
 
-    cp ${build_cache}/target/product/${product_name}/lineage-*.zip ${build_out}/ # Only the correct file gets found with "lineage-*.zip"
+    cp ${build_cache}/target/product/$1/lineage-*.zip ${build_out}/ # Only the correct file gets found with "lineage-*.zip"
     echo "####$1 Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
@@ -75,9 +53,9 @@ functions_update_customROM ${customROM_dir}
 
 add_custom_hacks
 
-build_lineageOS XZ2_SS
-build_lineageOS XZ2C_SS
-build_lineageOS XZ3_SS
+build_lineageOS akari # XZ2_SS
+build_lineageOS apollo # XZ2C_SS
+build_lineageOS akatsuki # XZ3_SS
 
 echo "Output ${build_out}"
 read -n1 -r -p "Press space to continue..."
