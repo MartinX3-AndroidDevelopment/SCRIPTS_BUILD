@@ -22,7 +22,9 @@ function add_custom_hacks() {
 function build_lineageOS() {
     echo "####SONY AOSP BUILD START####"
     cd ${customROM_dir}
+    set +u
     source ${customROM_dir}/build/envsetup.sh
+    set -u
 
     echo "####$1 Sim START####"
     case "$1" in

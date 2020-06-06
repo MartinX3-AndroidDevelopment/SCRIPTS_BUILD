@@ -12,7 +12,9 @@ function functions_set_variables() {
 
 function functions_build_omniROM_twrp() {
     cd ${customROM_dir}
+    set +u
     source ${customROM_dir}/build/envsetup.sh
+    set -u
 
     case "$1" in
         "xz2")
