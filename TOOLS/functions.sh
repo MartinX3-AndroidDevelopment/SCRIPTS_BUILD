@@ -72,9 +72,7 @@ function functions_update_customROM() {
 
 function functions_build_customROM_helper() {
     cd $1
-    set +u
     source $1/build/envsetup.sh
-    set -u
 
     lunch $2
 
