@@ -27,7 +27,7 @@ function build_sonyAOSP() {
 
     make -j$(nproc --all) dist # mka "Builds using SCHED_BATCH on all processors." and dist creates a flashable zip
 
-    cp ${build_cache}/dist/$1-ota-eng.martin.zip ${build_out}/$(date +%Y-%m-%d_%H-%M-%S)_sonyAOSP_$1.zip
+    cp ${build_cache}/dist/$1-ota-eng.martin.zip ${build_out}/aosp-10.0-$(date +%Y%m%d)_$1.zip
     echo "####$1 Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
