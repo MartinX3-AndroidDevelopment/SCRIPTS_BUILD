@@ -7,7 +7,7 @@
 function functions_init() {
     # Important to avoid compiler errors on nonenglish systems
     export LANG=de_DE.UTF-8
-    export LC_ALL=C
+    export LC_ALL=C.UTF-8
 
     # No ccache anymore since Android Q/10
     # Need to get installed/initiated
