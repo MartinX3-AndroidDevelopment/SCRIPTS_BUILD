@@ -23,7 +23,8 @@ function add_custom_hacks() {
 function build_omniROM_twrp() {
     echo "####OmniROM TWRP BUILD START####"
     echo "####$1 START####"
-    functions_twrp_build_customROM_helper ${customROM_dir} $1 ${PLATFORM_SECURITY_PATCH_OVERRIDE}
+    # functions_twrp_build_customROM_helper customROM_dir device_name PLATFORM_SECURITY_PATCH_OVERRIDE TARGET_STOCK
+    functions_twrp_build_customROM_helper ${customROM_dir} $1 ${PLATFORM_SECURITY_PATCH_OVERRIDE} false
 
     # Copy the template files into the output folder to get bundled
     yes | cp -rf ${current_dir}/../template/*.* ${build_out}/$1/

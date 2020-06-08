@@ -31,7 +31,8 @@ function add_custom_hacks() {
 function build_omniROM_twrp() {
     echo "####OmniROM TWRP BUILD START####"
     echo "####$1 START####"
-    functions_twrp_build_customROM_helper ${customROM_dir} $1 ${PLATFORM_SECURITY_PATCH_OVERRIDE}
+    # functions_twrp_build_customROM_helper customROM_dir device_name PLATFORM_SECURITY_PATCH_OVERRIDE TARGET_STOCK
+    functions_twrp_build_customROM_helper ${customROM_dir} $1 ${PLATFORM_SECURITY_PATCH_OVERRIDE} true
 
     yes | cp -rf ${build_cache_customROM}/target/product/$1/boot.img ${build_cache_SODP_TWRP}/$1/
     echo "####$1 END####"
@@ -115,8 +116,6 @@ function build_stockROM_twrp() {
     bash ${current_dir_tools_aik}/unpackimg.sh --nosudo
     # copy the stock fstab
     yes | cp -rf ${current_dir}/etc/* ${current_dir_tools_aik}/ramdisk/etc
-    # copy the stock touch enabling script
-    yes | cp -rf ${current_dir}/sbin/* ${current_dir_tools_aik}/ramdisk/sbin
 
     rm ${current_dir_tools_aik}/${boot_img_name}
 

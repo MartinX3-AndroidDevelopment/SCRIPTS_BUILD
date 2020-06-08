@@ -8,7 +8,7 @@ function functions_twrp_build_customROM_helper() {
     functions_build_customROM_helper $1 omni_$2-eng
 
     cd $1
-    make -j$(nproc --all) bootimage PLATFORM_SECURITY_PATCH_OVERRIDE=$3
+    make -j$(nproc --all) bootimage PLATFORM_SECURITY_PATCH_OVERRIDE=$3 TARGET_STOCK=$4
 }
 
 function functions_twrp_compress_builds() {
