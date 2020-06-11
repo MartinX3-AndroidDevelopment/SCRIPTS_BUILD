@@ -11,7 +11,7 @@ function set_variables() {
     build_out=${android_stuff_folder}/out/twrp/sodp/10
     current_dir=$(pwd)
     customROM_dir=/home/developer/android/rom/platform_manifest_twrp_omni_android_9.0
-    PLATFORM_SECURITY_PATCH_OVERRIDE=2020-05-05 # OmniROM 9.0 doesn't get new security patch level.
+    PLATFORM_SECURITY_PATCH_OVERRIDE=2020-06-05 # OmniROM 9.0 doesn't get new security patch level.
     echo "####SET VARIABLES END####"
 }
 
