@@ -18,8 +18,8 @@ function set_variables() {
     current_dir_tools_aik=${android_stuff_folder}/tools/Android-Image-Kitchen
     customROM_dir=${android_code_folder}/rom/platform_manifest_twrp_omni_android_9.0
     stock_kernel_dir=${android_code_folder}/MartinX3-AndroidDevelopment/sonyxperiadev-KERNEL_SONY_XPERIA_STOCK
-    stock_version_number=52.1.A.0.672
-    PLATFORM_SECURITY_PATCH_OVERRIDE=2020-03-05 # OmniROM 9.0 doesn't get new security patch level. Stock is one month behind.
+    stock_version_number=52.1.A.2.1
+    PLATFORM_SECURITY_PATCH_OVERRIDE=2020-05-05 # OmniROM 9.0 doesn't get new security patch level. Stock is one month behind.
     echo "####SET VARIABLES END####"
 }
 
