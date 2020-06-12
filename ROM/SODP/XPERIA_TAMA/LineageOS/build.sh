@@ -25,7 +25,7 @@ function build_lineageOS() {
 
     cd ${customROM_dir}
 
-    mka bacon # mka "Builds using SCHED_BATCH on all processors. -j$(nproc --all) is not needed here." and bacon creates a flashable zip
+    mka bacon # mka "Builds using SCHED_BATCH on all processors." and bacon creates a flashable zip
 
     cp ${build_cache}/target/product/$1/lineage-*.zip ${build_out}/ # Only the correct file gets found with "lineage-*.zip"
     echo "####$1 Sim END####"

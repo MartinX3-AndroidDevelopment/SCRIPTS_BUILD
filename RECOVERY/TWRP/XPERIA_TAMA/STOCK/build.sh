@@ -206,10 +206,10 @@ build_stockROM_twrp aurora
 build_stockROM_twrp apollo
 build_stockROM_twrp akatsuki
 
-functions_twrp_compress_builds ${build_out}/akari twrp_stock_akari
-functions_twrp_compress_builds ${build_out}/aurora twrp_stock_aurora
-functions_twrp_compress_builds ${build_out}/apollo twrp_stock_apollo
-functions_twrp_compress_builds ${build_out}/akatsuki twrp_stock_akatsuki
+functions_twrp_compress_builds ${build_out} akari
+functions_twrp_compress_builds ${build_out} aurora
+functions_twrp_compress_builds ${build_out} apollo
+functions_twrp_compress_builds ${build_out} akatsuki
 
 functions_twrp_clean_builds ${build_cache_stock_kernel}/akari
 functions_twrp_clean_builds ${build_cache_stock_kernel}/aurora
