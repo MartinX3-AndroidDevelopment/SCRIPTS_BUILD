@@ -11,7 +11,6 @@ function set_variables() {
     build_out=${android_stuff_folder}/out/twrp/sodp/10
     current_dir=$(pwd)
     customROM_dir=/home/developer/android/rom/platform_manifest_twrp_omni_android_9.0
-    PLATFORM_SECURITY_PATCH_OVERRIDE=2020-06-05 # OmniROM 9.0 doesn't get new security patch level.
     echo "####SET VARIABLES END####"
 }
 
@@ -24,7 +23,7 @@ function build_omniROM_twrp() {
     echo "####OmniROM TWRP BUILD START####"
     echo "####$1 START####"
     # functions_twrp_build_customROM_helper customROM_dir device_name PLATFORM_SECURITY_PATCH_OVERRIDE TARGET_STOCK
-    functions_twrp_build_customROM_helper ${customROM_dir} $1 ${PLATFORM_SECURITY_PATCH_OVERRIDE} false
+    functions_twrp_build_customROM_helper ${customROM_dir} $1 false
 
     # Copy the template files into the output folder to get bundled
     yes | cp -rf ${current_dir}/../template/*.* ${build_out}/$1/
