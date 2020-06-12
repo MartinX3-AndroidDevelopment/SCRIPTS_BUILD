@@ -18,8 +18,6 @@ function set_variables() {
     current_dir_tools_aik=${android_stuff_folder}/tools/Android-Image-Kitchen
     customROM_dir=${android_code_folder}/rom/platform_manifest_twrp_omni_android_9.0
     stock_kernel_dir=${android_code_folder}/MartinX3-AndroidDevelopment/sonyxperiadev-KERNEL_SONY_XPERIA_STOCK
-    stock_version_number=52.1.A.2.1
-    PLATFORM_SECURITY_PATCH_OVERRIDE=2020-05-05 # OmniROM 9.0 doesn't get new security patch level. Stock is one month behind.
     echo "####SET VARIABLES END####"
 }
 
@@ -32,7 +30,7 @@ function build_omniROM_twrp() {
     echo "####OmniROM TWRP BUILD START####"
     echo "####$1 START####"
     # functions_twrp_build_customROM_helper customROM_dir device_name PLATFORM_SECURITY_PATCH_OVERRIDE TARGET_STOCK
-    functions_twrp_build_customROM_helper ${customROM_dir} $1 ${PLATFORM_SECURITY_PATCH_OVERRIDE} true
+    functions_twrp_build_customROM_helper ${customROM_dir} $1 true
 
     yes | cp -rf ${build_cache_customROM}/target/product/$1/boot.img ${build_cache_SODP_TWRP}/$1/
     echo "####$1 END####"
@@ -208,10 +206,10 @@ build_stockROM_twrp aurora
 build_stockROM_twrp apollo
 build_stockROM_twrp akatsuki
 
-functions_twrp_compress_builds ${build_out}/akari twrp_stock_akari_${stock_version_number}
-functions_twrp_compress_builds ${build_out}/aurora twrp_stock_aurora_${stock_version_number}
-functions_twrp_compress_builds ${build_out}/apollo twrp_stock_apollo_${stock_version_number}
-functions_twrp_compress_builds ${build_out}/akatsuki twrp_stock_akatsuki_${stock_version_number}
+functions_twrp_compress_builds ${build_out}/akari twrp_stock_akari
+functions_twrp_compress_builds ${build_out}/aurora twrp_stock_aurora
+functions_twrp_compress_builds ${build_out}/apollo twrp_stock_apollo
+functions_twrp_compress_builds ${build_out}/akatsuki twrp_stock_akatsuki
 
 functions_twrp_clean_builds ${build_cache_stock_kernel}/akari
 functions_twrp_clean_builds ${build_cache_stock_kernel}/aurora
