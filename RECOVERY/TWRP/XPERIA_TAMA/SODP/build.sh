@@ -66,9 +66,9 @@ build_omniROM_twrp akari # xz2
 build_omniROM_twrp apollo # xz2c
 build_omniROM_twrp akatsuki # xz3
 
-functions_twrp_compress_builds ${build_out}/akari twrp_sodp_akari
-functions_twrp_compress_builds ${build_out}/apollo twrp_sodp_apollo
-functions_twrp_compress_builds ${build_out}/akatsuki twrp_sodp_akatsuki
+functions_twrp_compress_builds ${build_out} akari
+functions_twrp_compress_builds ${build_out} apollo
+functions_twrp_compress_builds ${build_out} akatsuki
 
 functions_twrp_clean_builds ${build_out}/akari
 functions_twrp_clean_builds ${build_out}/apollo
