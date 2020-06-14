@@ -21,7 +21,7 @@ function add_custom_hacks() {
 function build_lineageOS() {
     echo "####SONY AOSP BUILD START####"
     echo "####$1 Sim START####"
-    functions_build_customROM_helper ${customROM_dir} lineage_$1_RoW-userdebug
+    functions_build_customROM_helper ${customROM_dir} lineage_$1-userdebug
 
     cd ${customROM_dir}
 
