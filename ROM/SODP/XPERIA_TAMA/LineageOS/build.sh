@@ -27,7 +27,7 @@ function build_lineageOS() {
 
     mka bacon # mka "Builds using SCHED_BATCH on all processors." and bacon creates a flashable zip
 
-    cp ${build_cache}/target/product/$1/lineage-*.zip ${build_out}/ # Only the correct file gets found with "lineage-*.zip"
+    mv ${build_cache}/target/product/$1/lineage-*.zip ${build_out}/ # Only the correct file gets found with "lineage-*.zip"
     echo "####$1 Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
