@@ -27,7 +27,7 @@ function build_sonyAOSP() {
 
     make -j dist # -j uses all threads for the build process and dist creates a flashable zip
 
-    cp ${build_cache}/dist/$1-ota-eng.martin.zip ${build_out}/aosp-10.0-$(date +%Y%m%d)_$1.zip
+    mv ${build_cache}/dist/$1-ota-eng.martin.zip ${build_out}/aosp-10.0-$(date +%Y%m%d)_$1.zip
     echo "####$1 Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
