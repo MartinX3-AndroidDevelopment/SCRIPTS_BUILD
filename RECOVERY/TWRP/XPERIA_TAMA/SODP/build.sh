@@ -6,7 +6,7 @@
 
 function set_variables() {
     echo "####SET VARIABLES START####"
-    android_stuff_folder=/media/martin/extLinux/developer/android # A shiny variable name, isn't it?
+    android_stuff_folder=/run/media/martin/extLinux/developer/android # A shiny variable name, isn't it?
     build_cache_customROM=${android_stuff_folder}/cache/twrp_omni_minimal/9 #CustomROM out dir
     build_out=${android_stuff_folder}/out/twrp/sodp/10
     current_dir=$(pwd)

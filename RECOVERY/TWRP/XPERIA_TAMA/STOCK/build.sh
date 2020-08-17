@@ -7,7 +7,7 @@
 function set_variables() {
     echo "####SET VARIABLES START####"
     android_code_folder=/home/developer/android
-    android_stuff_folder=/media/martin/extLinux/developer/android # A shiny variable name, isn't it?
+    android_stuff_folder=/run/media/martin/extLinux/developer/android # A shiny variable name, isn't it?
     android_stuff_folder_cache=${android_stuff_folder}/cache
     android_stuff_folder_cache_twrp=${android_stuff_folder_cache}/twrp/stock/10
     build_cache_customROM=${android_stuff_folder_cache}/twrp_omni_minimal/9 #CustomROM out dir
@@ -64,12 +64,12 @@ function build_stockROM_kernel() {
     # absolute path, no shell variables or the compilation of the stock kernel fails
     export ARCH=arm64
     export CROSS_COMPILE=aarch64-linux-android-
-    export DTC_EXT=/media/martin/extLinux/developer/android/tools/stock_kernel/dtc
-    export DTC_OVERLAY_TEST_EXT=/media/martin/extLinux/developer/android/tools/stock_kernel/ufdt_apply_overlay_host
+    export DTC_EXT=/run/media/martin/extLinux/developer/android/tools/stock_kernel/dtc
+    export DTC_OVERLAY_TEST_EXT=/run/media/martin/extLinux/developer/android/tools/stock_kernel/ufdt_apply_overlay_host
     export KCFLAGS=-mno-android
     export O=/home/developer/android/MartinX3-AndroidDevelopment/sonyxperiadev-kernel-copyleft/out
     PATH_backup=$PATH
-    export PATH=/media/martin/extLinux/developer/android/tools/stock_kernel/aarch64-linux-android-4.9/bin/:$PATH
+    export PATH=/run/media/martin/extLinux/developer/android/tools/stock_kernel/aarch64-linux-android-4.9/bin/:$PATH
 
     cd ${stock_kernel_dir}
 
