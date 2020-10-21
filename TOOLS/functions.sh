@@ -6,7 +6,7 @@
 
 function functions_init() {
     # Important to avoid compiler errors on nonenglish systems
-    export LC_ALL=C.UTF-8
+    #export LC_ALL=C.UTF-8
 
     # No ccache anymore since Android Q/10
     # Need to get installed/initiated
@@ -20,9 +20,9 @@ function functions_init() {
 
 function functions_create_folders() {
     echo "####Test if the $1 device folder exist or creates it START####"
-    if [[ ! -d $1 ]]
+    if [[ ! -d ${1:?} ]]
     then
-        mkdir $1
+        mkdir "${1:?}"
     fi
     echo "####Test if the $1 device folder exist or creates it END####"
 }
@@ -31,16 +31,16 @@ function functions_test_repo_up_to_date() {
     echo "####Test if git repo is up-to-date START####"
     UPSTREAM=${1:-'@{u}'}
     LOCAL=$(git rev-parse @)
-    REMOTE=$(git rev-parse "$UPSTREAM")
-    BASE=$(git merge-base @ "$UPSTREAM")
+    REMOTE=$(git rev-parse "${UPSTREAM:?}")
+    BASE=$(git merge-base @ "${UPSTREAM:?}")
 
-    if [[ ${LOCAL} = ${REMOTE} ]]; then
+    if [[ ${LOCAL:?} = "${REMOTE:?}" ]]; then
         echo "Git repo is up-to-date!"
         git prune # Remove unneeded elements to save space and time.
-    elif [[ ${LOCAL} = ${BASE} ]]; then
+    elif [[ ${LOCAL:?} = "${BASE:?}" ]]; then
         echo "Git repo not up to date!"
         read -n1 -r -p "Press space to continue..."
-    elif [[ ${REMOTE} = ${BASE} ]]; then
+    elif [[ ${REMOTE:?} = "${BASE:?}" ]]; then
         echo "Git repo as uncommited changes"
         read -n1 -r -p "Press space to continue..."
     else
@@ -53,11 +53,11 @@ function functions_test_repo_up_to_date() {
 
 function functions_update_customROM() {
     echo "####CustomROM UPDATE START####"
-    cd $1/.repo/local_manifests
+    cd "${1:?}"/.repo/local_manifests || exit
     git reset --hard
     git pull
 
-    cd $1
+    cd "${1:?}" || exit
     repo forall -vc "git reset --hard"
     repo sync --force-sync -j32
     repo prune # Remove unneeded elements to save space and time.
@@ -70,10 +70,11 @@ function functions_update_customROM() {
 }
 
 function functions_build_customROM_helper() {
-    cd $1
-    source $1/build/envsetup.sh
+    cd "${1:?}" || exit
+    # shellcheck disable=SC1090 # Since it is from the rom source code
+    source "${1:?}"/build/envsetup.sh
 
-    lunch $2
+    lunch "${2:?}"
 
     make installclean # Clean build while saving the buildcache.
 }
