@@ -7,8 +7,8 @@
 function set_variables() {
     echo "####SET VARIABLES START####"
     android_stuff_folder=/run/media/martin/extLinux/developer/android # A shiny variable name, isn't it?
-    build_cache_customROM=${android_stuff_folder}/cache/twrp_omni_minimal/9 #CustomROM out dir
-    build_out=${android_stuff_folder}/out/twrp/sodp/10
+    build_cache_customROM=${android_stuff_folder:?}/cache/twrp_omni_minimal/9 #CustomROM out dir
+    build_out=${android_stuff_folder:?}/out/twrp/sodp/10
     current_dir=$(pwd)
     customROM_dir=/home/developer/android/rom/platform_manifest_twrp_omni_android_9.0
     echo "####SET VARIABLES END####"
@@ -23,11 +23,11 @@ function build_omniROM_twrp() {
     echo "####OmniROM TWRP BUILD START####"
     echo "####$1 START####"
     # functions_twrp_build_customROM_helper customROM_dir device_name PLATFORM_SECURITY_PATCH_OVERRIDE TARGET_STOCK
-    functions_twrp_build_customROM_helper ${customROM_dir} $1 false
+    functions_twrp_build_customROM_helper ${customROM_dir:?} "${1:?}" false
 
     # Copy the template files into the output folder to get bundled
-    yes | cp -rf ${current_dir}/../template/*.* ${build_out}/$1/
-    yes | cp -rf ${build_cache_customROM}/target/product/$1/boot.img ${build_out}/$1/twrp-$1.img
+    cp -rf "${current_dir:?}"/../template/*.* ${build_out:?}/"${1:?}"/
+    cp -rf ${build_cache_customROM:?}/target/product/"${1:?}"/boot.img ${build_out:?}/"${1:?}"/twrp-"${1:?}".img
     echo "####$1 END####"
     echo "####OmniROM TWRP BUILD END####"
 }
@@ -46,19 +46,19 @@ functions_init
 
 set_variables
 
-functions_create_folders ${build_cache_customROM}
-functions_create_folders ${build_out}
-functions_create_folders ${build_out}/akari
-functions_create_folders ${build_out}/apollo
-functions_create_folders ${build_out}/akatsuki
+functions_create_folders ${build_cache_customROM:?}
+functions_create_folders ${build_out:?}
+functions_create_folders ${build_out:?}/akari
+functions_create_folders ${build_out:?}/apollo
+functions_create_folders ${build_out:?}/akatsuki
 
 functions_test_repo_up_to_date
 
-functions_twrp_clean_builds ${build_out}/akari
-functions_twrp_clean_builds ${build_out}/apollo
-functions_twrp_clean_builds ${build_out}/akatsuki
+functions_twrp_clean_builds ${build_out:?}/akari
+functions_twrp_clean_builds ${build_out:?}/apollo
+functions_twrp_clean_builds ${build_out:?}/akatsuki
 
-functions_update_customROM ${customROM_dir}
+functions_update_customROM ${customROM_dir:?}
 
 add_custom_hacks
 
@@ -66,15 +66,15 @@ build_omniROM_twrp akari # xz2
 build_omniROM_twrp apollo # xz2c
 build_omniROM_twrp akatsuki # xz3
 
-functions_twrp_compress_builds ${build_out} akari
-functions_twrp_compress_builds ${build_out} apollo
-functions_twrp_compress_builds ${build_out} akatsuki
+functions_twrp_compress_builds ${build_out:?} akari
+functions_twrp_compress_builds ${build_out:?} apollo
+functions_twrp_compress_builds ${build_out:?} akatsuki
 
-functions_twrp_clean_builds ${build_out}/akari
-functions_twrp_clean_builds ${build_out}/apollo
-functions_twrp_clean_builds ${build_out}/akatsuki
+functions_twrp_clean_builds ${build_out:?}/akari
+functions_twrp_clean_builds ${build_out:?}/apollo
+functions_twrp_clean_builds ${build_out:?}/akatsuki
 
-echo "Output ${build_out}"
+echo "Output ${build_out:?}"
 read -n1 -r -p "Press space to continue..."
 echo "Upload to androidfilehost.com !"
 read -n1 -r -p "Press space to continue..."
