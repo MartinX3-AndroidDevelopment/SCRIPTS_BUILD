@@ -5,9 +5,6 @@
 #
 
 function functions_init() {
-    # Important to avoid compiler errors on nonenglish systems
-    #export LC_ALL=C.UTF-8
-
     # No ccache anymore since Android Q/10
     # Need to get installed/initiated
     # https://sx.ix5.org/info/post/android-q-changes/
