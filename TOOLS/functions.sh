@@ -56,13 +56,11 @@ function functions_update_customROM() {
 
     cd "${1:?}" || exit
     repo forall -vc "git reset --hard"
-    repo sync --force-sync -j32
-    repo prune # Remove unneeded elements to save space and time.
 
-    # Executing the special project updates.
-    # Skiping the repo sync here, since we already did it.
-    export SKIP_SYNC=TRUE
+    repo sync repo_update --force-sync
     ./repo_update.sh
+
+    repo prune # Remove unneeded elements to save space and time.
     echo "####CustomROM UPDATE END####"
 }
 
