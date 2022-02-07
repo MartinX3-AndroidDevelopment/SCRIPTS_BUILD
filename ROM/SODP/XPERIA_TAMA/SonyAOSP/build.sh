@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-#
-# Copyright (c) 2020 Martin Dünkelmann
-# All rights reserved.
-#
 
 function set_variables() {
     echo "####SET VARIABLES START####"

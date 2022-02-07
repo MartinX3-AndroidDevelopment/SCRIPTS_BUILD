@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-#
-# Copyright (c) 2019-2020 Martin Dünkelmann
-# All rights reserved.
-#
 
 function functions_init() {
     # No ccache anymore since Android Q/10

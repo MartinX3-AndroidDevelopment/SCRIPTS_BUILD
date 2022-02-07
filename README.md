@@ -1,6 +1,3 @@
-Copyright (c) 2019-2020 Martin Dünkelmann  
-All rights reserved.
-
 # SCRIPTS_BUILD
 Buildscripts for the projects
 
