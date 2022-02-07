@@ -35,7 +35,7 @@ function functions_test_repo_up_to_date() {
         echo "Git repo not up to date!"
         read -n1 -r -p "Press space to continue..."
     elif [[ ${REMOTE:?} = "${BASE:?}" ]]; then
-        echo "Git repo as uncommited changes"
+        echo "Git repo as uncommitted changes"
         read -n1 -r -p "Press space to continue..."
     else
         echo "Git repo is in a weird state."
