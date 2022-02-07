@@ -5,9 +5,10 @@ function functions_init() {
     # Need to get installed/initiated
     # https://sx.ix5.org/info/post/android-q-changes/
     # https://sx.ix5.org/info/building-android/#optimize-the-build
-    export CCACHE_EXEC=/usr/bin/ccache
-    export USE_CCACHE=1
-    export CCACHE_COMPRESS=1
+    # Do not use the ccache!
+    # There is no real performance increase over incremental builds.
+    # If you add or remove the ccache usage on a build by accident,
+    #  aosp wipes your "out" folder and you need to compile everything again.
     export WITHOUT_CHECK_API=true
 }
 
