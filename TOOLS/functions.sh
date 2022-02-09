@@ -67,6 +67,4 @@ function functions_build_customROM_helper() {
     source "${1:?}"/build/envsetup.sh
 
     lunch "${2:?}"
-
-    make installclean # Clean build while saving the buildcache.
 }
