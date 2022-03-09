@@ -2,9 +2,9 @@
 
 function set_variables() {
     echo "####SET VARIABLES START####"
-    build_cache=/media/extLinux/developer/android/cache/sonyAOSP/12 #CustomROM out dir
-    build_out=/media/extLinux/developer/android/out/sonyAOSP/12
-    customROM_dir=/home/developer/android/rom/sonyAOSP/12
+    build_cache=/media/extLinux/developer/android/cache/sonyAOSP/12.1 #CustomROM out dir
+    build_out=/media/extLinux/developer/android/out/sonyAOSP/12.1
+    customROM_dir=/home/developer/android/rom/sonyAOSP/12.1
     echo "####SET VARIABLES END####"
 }
 
@@ -22,7 +22,7 @@ function build_sonyAOSP() {
 
     make -j dist # -j uses all threads for the build process and dist creates a flashable zip
 
-    mv ${build_cache}/dist/"${1:?}"-ota-eng.martin.zip ${build_out}/aosp-12.0-"$(date +%Y%m%d)"_"${1:?}".zip
+    mv ${build_cache}/dist/"${1:?}"-ota-eng.martin.zip ${build_out}/aosp-12.1-"$(date +%Y%m%d)"_"${1:?}".zip
     echo "####$1 Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
