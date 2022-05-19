@@ -19,10 +19,14 @@ function build_sonyAOSP() {
     functions_build_customROM_helper ${customROM_dir:?} "${1:?}"-userdebug
 
     cd ${customROM_dir:?}
+    # TODO Workaround for https://github.com/sonyxperiadev/bug_tracker/issues/744
+    # Building OTA zips isn't possible for now.
+    #make -j dist # -j uses all threads for the build process and dist creates a flashable zip
+    #mv ${build_cache}/dist/"${1:?}"-ota-eng.martin.zip ${build_out}/aosp-12.1-"$(date +%Y%m%d)"_"${1:?}".zip
+    make -j
 
-    make -j dist # -j uses all threads for the build process and dist creates a flashable zip
-
-    mv ${build_cache}/dist/"${1:?}"-ota-eng.martin.zip ${build_out}/aosp-12.1-"$(date +%Y%m%d)"_"${1:?}".zip
+    cd ${build_cache}/target/product/${2:?}/
+    tar -I 'pigz -9k' -cvf ${build_out}/aosp-12.1-"$(date +%Y%m%d)"_"${2:?}".tar.zip boot.img dtbo.img system.img userdata.img vbmeta.img vendor.img
     echo "####$1 Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
@@ -47,9 +51,9 @@ functions_update_customROM ${customROM_dir:?}
 
 add_custom_hacks
 
-build_sonyAOSP aosp_h8216 # XZ2_SS
-build_sonyAOSP aosp_h8314 # XZ2C_SS
-build_sonyAOSP aosp_h8416 # XZ3_SS
+build_sonyAOSP aosp_h8216 akari # XZ2_SS
+build_sonyAOSP aosp_h8314 apollo # XZ2C_SS
+build_sonyAOSP aosp_h8416 akatsuki # XZ3_SS
 
 echo "Output ${build_out:?}"
 read -n1 -r -p "Press space to continue..."
