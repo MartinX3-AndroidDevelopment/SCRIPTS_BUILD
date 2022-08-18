@@ -2,9 +2,9 @@
 
 function set_variables() {
     echo "####SET VARIABLES START####"
-    build_cache=/media/extLinux/developer/android/cache/sonyAOSP/12.1 #CustomROM out dir
-    build_out=/media/extLinux/developer/android/out/sonyAOSP/12.1
-    customROM_dir=/home/developer/android/rom/sonyAOSP/12.1
+    build_cache=/media/extLinux/developer/android/cache/sonyAOSP/13 #CustomROM out dir
+    build_out=/media/extLinux/developer/android/out/sonyAOSP/13
+    customROM_dir=/home/developer/android/rom/sonyAOSP/13
     echo "####SET VARIABLES END####"
 }
 
@@ -22,11 +22,11 @@ function build_sonyAOSP() {
     # TODO Workaround for https://github.com/sonyxperiadev/bug_tracker/issues/744
     # Building OTA zips isn't possible for now.
     #make -j dist # -j uses all threads for the build process and dist creates a flashable zip
-    #mv ${build_cache}/dist/"${1:?}"-ota-eng.martin.zip ${build_out}/aosp-12.1-"$(date +%Y%m%d)"_"${1:?}".zip
+    #mv ${build_cache}/dist/"${1:?}"-ota-eng.martin.zip ${build_out}/aosp-13-"$(date +%Y%m%d)"_"${1:?}".zip
     make -j
 
-    cd ${build_cache}/target/product/${2:?}/
-    tar -I 'pigz -9k' -cvf ${build_out}/aosp-12.1-"$(date +%Y%m%d)"_"${2:?}".tar.zip boot.img dtbo.img system.img userdata.img vbmeta.img vendor.img
+    cd ${build_cache}/target/product/"${2:?}"/
+    tar -I 'pigz -9k' -cvf ${build_out}/aosp-13-"$(date +%Y%m%d)"_"${2:?}".tar.zip boot.img dtbo.img system.img userdata.img vbmeta.img vendor.img
     echo "####$1 Sim END####"
     echo "####SONY AOSP BUILD END####"
 }
