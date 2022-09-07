@@ -21,9 +21,9 @@ function build_sonyAOSP() {
     cd ${customROM_dir:?}
     # TODO Workaround for https://github.com/sonyxperiadev/bug_tracker/issues/744
     # Building OTA zips isn't possible for now.
-    #make -j$(grep ^cpu\\scores /proc/cpuinfo | uniq |  awk '{print $4}') dist # exclude hyperthreading cores since the A13 build system uses much more RAM & dist creates a flashable zip
+    #make -j$(nproc --ignore=2) dist # exclude 1 real & 1 hyperthreading core since the A13 build system uses much more RAM & dist creates a flashable zip
     #mv ${build_cache}/dist/"${1:?}"-ota-eng.martin.zip ${build_out}/aosp-13-"$(date +%Y%m%d)"_"${1:?}".zip
-    make -j$(grep ^cpu\\scores /proc/cpuinfo | uniq |  awk '{print $4}') # exclude hyperthreading cores since the A13 build system uses much more RAM
+    make -j$(nproc --ignore=2) # exclude 1 real & 1 hyperthreading core since the A13 build system uses much more RAM
 
     cd ${build_cache}/target/product/"${2:?}"/
     tar -I 'pigz -9k' -cvf ${build_out}/aosp-13-"$(date +%Y%m%d)"_"${2:?}".tar.zip boot.img dtbo.img system.img userdata.img vbmeta.img vendor.img
