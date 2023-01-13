@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: builder
+  labels:
+    io.containers.autoupdate: registry
+spec:
+  restartPolicy: Never
+  containers:
+    - name: aosp
+      image: ghcr.io/martinx3-androiddevelopment/scripts_build:android-13
+      imagePullPolicy: Always
+      command: ["ROM/SODP/XPERIA_TAMA/SonyAOSP/build.sh"]
+      resources:
+        limits:
+          cpu: 950m
+          memory: 16Gi
+        requests:
+          cpu: 500m
+          memory: 8Gi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        privileged: false
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumeMounts:
+        - mountPath: /code
+          name: code-volume
+        - mountPath: /out
+          name: out-volume
+  volumes:
+    - name: code-volume
+      hostPath:
+        path: /home/developer/android/rom/sonyAOSP/13/code
+        type: Directory
+    - name: out-volume
+      hostPath:
+        path: /home/developer/android/rom/sonyAOSP/13/out
+        type: Directory

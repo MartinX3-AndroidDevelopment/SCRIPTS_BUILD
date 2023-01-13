@@ -1,0 +1,6 @@
+.dockerignore
+.git
+.github
+.idea
+Containerfile
+renovate.json

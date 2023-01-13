@@ -1,0 +1,28 @@
+name: Publishing image to GitHub Packages
+on:
+  push:
+    branches: [ "android-13" ]
+jobs:
+  build_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Build Image
+        id: build_image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: ${{ github.repository }}
+          containerfiles: |
+            ./Containerfile
+          oci: true
+          tags: |
+            ${{ github.ref_name }}
+      - name: Push To ghcr.io
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build_image.outputs.image }}
+          password: ${{ github.token }}
+          registry: ghcr.io
+          tags: ${{ steps.build_image.outputs.tags }}
+          username: ${{ github.actor }}
