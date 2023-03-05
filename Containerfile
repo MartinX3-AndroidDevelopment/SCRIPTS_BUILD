@@ -6,9 +6,12 @@ RUN pacman -Syu --noconfirm \
     git \
     gperf \
     jdk17-openjdk \
+    msmtp \
     openssh \
     repo \
     wget
+
+COPY container/msmtprc /etc/msmtprc
 
 RUN useradd -m -s /bin/bash -u 1000 builder \
     && useradd -m -s /bin/bash -u 1001 installer \

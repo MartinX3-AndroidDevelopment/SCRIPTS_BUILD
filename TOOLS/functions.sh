@@ -1,5 +1,22 @@
 #!/usr/bin/env bash
 
+function functions_build_customROM_helper() {
+    cd "${1:?}" || exit
+    # shellcheck disable=SC1090 # Since it is from the rom source code
+    source "${1:?}"/build/envsetup.sh
+
+    lunch "${2:?}"
+}
+
+function functions_create_folders() {
+    echo "####Test if the $1 device folder exist or creates it START####"
+    if [[ ! -d ${1:?} ]]
+    then
+        mkdir "${1:?}"
+    fi
+    echo "####Test if the $1 device folder exist or creates it END####"
+}
+
 function functions_init() {
     # No ccache anymore since Android Q/10
     # Need to get installed/initiated
@@ -12,13 +29,10 @@ function functions_init() {
     export WITHOUT_CHECK_API=true
 }
 
-function functions_create_folders() {
-    echo "####Test if the $1 device folder exist or creates it START####"
-    if [[ ! -d ${1:?} ]]
-    then
-        mkdir "${1:?}"
-    fi
-    echo "####Test if the $1 device folder exist or creates it END####"
+function functions_success() {
+    echo "Upload to androidfilehost.com !"
+    echo "Upload to dhacke strato server !"
+    echo "The following android build is ready: $1" | msmtp -a default android-builder@localhost
 }
 
 function functions_update_customROM() {
@@ -35,12 +49,4 @@ function functions_update_customROM() {
 
     repo prune # Remove unneeded elements to save space and time.
     echo "####CustomROM UPDATE END####"
-}
-
-function functions_build_customROM_helper() {
-    cd "${1:?}" || exit
-    # shellcheck disable=SC1090 # Since it is from the rom source code
-    source "${1:?}"/build/envsetup.sh
-
-    lunch "${2:?}"
 }

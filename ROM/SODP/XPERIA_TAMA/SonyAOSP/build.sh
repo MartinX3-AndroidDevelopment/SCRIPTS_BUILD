@@ -44,9 +44,7 @@ build_sonyAOSP aosp_h8216 akari # XZ2_SS
 build_sonyAOSP aosp_h8314 apollo # XZ2C_SS
 build_sonyAOSP aosp_h8416 akatsuki # XZ3_SS
 
-echo "Output ${build_out:?}"
-echo "Upload to androidfilehost.com !"
-echo "Upload to dhacke strato server !"
+functions_success "Sony AOSP"
 
 set +e
 
