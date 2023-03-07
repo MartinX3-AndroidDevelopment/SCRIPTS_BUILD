@@ -9,6 +9,7 @@ RUN pacman -Syu --noconfirm \
     msmtp \
     openssh \
     repo \
+    unzip \
     wget \
     zip
 
