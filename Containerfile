@@ -9,7 +9,8 @@ RUN pacman -Syu --noconfirm \
     msmtp \
     openssh \
     repo \
-    wget
+    wget \
+    zip
 
 COPY container/msmtprc /etc/msmtprc
 
