@@ -10,6 +10,7 @@ RUN pacman -Syu --noconfirm \
     msmtp \
     openssh \
     repo \
+    ttf-dejavu \
     unzip \
     wget \
     zip
