@@ -34,6 +34,8 @@ spec:
           name: code-volume
         - mountPath: /out
           name: out-volume
+        - mountPath: /tmp
+          name: tmp-volume
   volumes:
     - name: code-volume
       hostPath:
@@ -43,3 +45,7 @@ spec:
       hostPath:
         path: /home/developer/android/rom/sonyAOSP/13/out
         type: Directory
+    - name: tmp-volume
+      emptyDir:
+        medium: Memory
+        sizeLimit: 64Mi
