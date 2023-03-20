@@ -14,10 +14,10 @@ spec:
       resources:
         limits:
           cpu: 950m
-          memory: 16Gi
+          memory: 24Gi
         requests:
           cpu: 500m
-          memory: 8Gi
+          memory: 12Gi
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
