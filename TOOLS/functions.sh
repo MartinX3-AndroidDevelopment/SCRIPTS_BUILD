@@ -6,6 +6,8 @@ function functions_build_customROM_helper() {
     source "${1:?}"/build/envsetup.sh
 
     lunch "${2:?}"
+
+    make installclean # Clean build while saving the buildcache and provides a clean state if the container crashed.
 }
 
 function functions_create_folders() {
