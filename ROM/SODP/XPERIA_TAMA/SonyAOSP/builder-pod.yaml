@@ -48,4 +48,4 @@ spec:
     - name: tmp-volume
       emptyDir:
         medium: Memory
-        sizeLimit: 64Mi
+        sizeLimit: 256Mi
