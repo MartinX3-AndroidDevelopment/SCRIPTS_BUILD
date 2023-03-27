@@ -8,6 +8,7 @@ RUN pacman -Syu --noconfirm \
     gperf \
     jdk17-openjdk \
     msmtp \
+    nano \
     openssh \
     repo \
     rsync \
