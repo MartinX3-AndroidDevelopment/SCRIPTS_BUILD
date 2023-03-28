@@ -11,13 +11,6 @@ spec:
       image: ghcr.io/martinx3-androiddevelopment/scripts_build:android-13
       imagePullPolicy: Always
       command: ["ROM/SODP/XPERIA_TAMA/SonyAOSP/build.sh"]
-      resources:
-        limits:
-          cpu: 950m
-          memory: 24Gi
-        requests:
-          cpu: 500m
-          memory: 12Gi
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
