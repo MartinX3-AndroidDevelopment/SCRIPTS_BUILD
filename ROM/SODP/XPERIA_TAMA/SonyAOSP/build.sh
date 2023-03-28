@@ -19,7 +19,8 @@ function build_sonyAOSP() {
     functions_build_customROM_helper ${customROM_dir:?} "${1:?}"-userdebug
 
     cd ${customROM_dir:?}
-    make -j dist
+    echo "Log build to ${build_out}/aosp-${aosp_version}_"${2:?}"-build.log"
+    make -j dist > ${build_out}/aosp-${aosp_version}_"${2:?}"-build.log
     mv out/dist/"${1:?}"-ota-eng.*.zip ${build_out}/aosp-${aosp_version}-"$(date +%Y%m%d)"_"${2:?}".zip
     echo "####$1 Sim END####"
     echo "####SONY AOSP BUILD END####"
