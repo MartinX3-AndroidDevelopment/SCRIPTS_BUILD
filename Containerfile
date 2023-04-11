@@ -1,4 +1,4 @@
-FROM docker.io/archlinux:base-devel-20230319.0.135218
+FROM docker.io/archlinux:base-devel-20230409.0.141585
 
 RUN pacman -Syu --noconfirm \
     bc \
