@@ -1,45 +1,40 @@
-FROM docker.io/archlinux:base-devel-20230507.0.148551
+FROM docker.io/eclipse-temurin:17.0.7_7-jdk-jammy
 
-RUN pacman -Syu --noconfirm \
-    bc \
-    fontconfig \
-    gcc-go \
-    git \
-    gperf \
-    jdk17-openjdk \
-    msmtp \
-    nano \
-    openssh \
-    repo \
-    rsync \
-    ttf-dejavu \
-    unzip \
-    wget \
-    zip
+RUN dpkg --add-architecture i386 \
+    && apt update \
+    && apt install -y bison \
+        bc \
+        curl \
+        flex \
+        g++-multilib \
+        git \
+        gperf \
+        liblz4-tool \
+        libncurses5 \
+        libssl-dev \
+        libxml2-utils \
+        make \
+        python-is-python3 \
+        zip \
+        zlib1g-dev zlib1g-dev:i386 \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY container/msmtprc /etc/msmtprc
 
-RUN useradd -m -s /bin/bash -u 1000 builder \
-    && useradd -m -s /bin/bash -u 1001 installer \
-    && passwd -d installer \
-    && printf 'installer ALL=(ALL) ALL\n' | tee -a /etc/sudoers
-
-USER installer
-
-WORKDIR /tmp
-
-RUN wget https://aur.archlinux.org/cgit/aur.git/snapshot/ncurses5-compat-libs.tar.gz \
-    && tar xvf ncurses5-compat-libs.tar.gz \
-    && rm ncurses5-compat-libs.tar.gz \
-    && cd ncurses5-compat-libs \
-    && gpg --recv-key 19882D92DDA4C400C22C0D56CC2AF4472167BE03 \
-    && makepkg -si --noconfirm
-
+RUN useradd -m -s /bin/bash -u 1000 builder
 
 USER builder
 
 RUN git config --global user.email "builder@example.com" \
     && git config --global user.name "builder"
+
+RUN mkdir ~/bin \
+    && curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo \
+    && chmod a+x ~/bin/repo \
+    && echo 'export PATH=~/bin:$PATH' >> ~/.bashrc
+
+ENV PATH=~/bin:$PATH
 
 WORKDIR /script
 

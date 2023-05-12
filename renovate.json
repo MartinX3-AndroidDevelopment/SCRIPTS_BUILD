@@ -10,9 +10,7 @@
   "packageRules": [
     {
       "automerge": true,
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["docker.io/archlinux"],
-      "versioning": "regex:^(?<compatibility>([\\w-]+)-)?(?<patch>\\d{8}\\.\\d{1}\\.\\d+)?$"
+      "matchDatasources": ["docker"]
     }
   ]
 }
