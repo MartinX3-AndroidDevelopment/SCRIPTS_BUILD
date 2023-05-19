@@ -15,6 +15,7 @@ RUN dpkg --add-architecture i386 \
         libxml2-utils \
         make \
         python-is-python3 \
+        rsync \
         zip \
         zlib1g-dev zlib1g-dev:i386 \
     && apt clean \
