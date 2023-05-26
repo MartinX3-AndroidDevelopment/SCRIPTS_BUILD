@@ -14,6 +14,7 @@ RUN dpkg --add-architecture i386 \
         libssl-dev \
         libxml2-utils \
         make \
+        msmtp \
         python-is-python3 \
         rsync \
         zip \
