@@ -1,8 +1,9 @@
 FROM docker.io/eclipse-temurin:17.0.7_7-jdk-jammy
 
-RUN dpkg --add-architecture i386 \
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
+    && dpkg --add-architecture i386 \
     && apt update \
-    && apt install -y bison \
+    && apt install -q -y bison \
         bc \
         curl \
         flex \
