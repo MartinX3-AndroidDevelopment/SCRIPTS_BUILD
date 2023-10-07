@@ -8,7 +8,7 @@ spec:
   restartPolicy: Never
   containers:
     - name: aosp
-      image: ghcr.io/martinx3-androiddevelopment/scripts_build:android-13
+      image: ghcr.io/martinx3-androiddevelopment/scripts_build:android-14
       imagePullPolicy: Always
       command: ["ROM/SODP/XPERIA_TAMA/SonyAOSP/build.sh"]
       securityContext:
@@ -32,11 +32,11 @@ spec:
   volumes:
     - name: code-volume
       hostPath:
-        path: /home/developer/android/rom/sonyAOSP/13/code
+        path: /home/developer/android/rom/sonyAOSP/14/code
         type: Directory
     - name: out-volume
       hostPath:
-        path: /home/developer/android/rom/sonyAOSP/13/out
+        path: /home/developer/android/rom/sonyAOSP/14/out
         type: Directory
     - name: tmp-volume
       emptyDir:

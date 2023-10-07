@@ -2,7 +2,7 @@
 
 function set_variables() {
     echo "####SET VARIABLES START####"
-    aosp_version=13
+    aosp_version=14
     build_out=/out
     customROM_dir=/code
     echo "####SET VARIABLES END####"
