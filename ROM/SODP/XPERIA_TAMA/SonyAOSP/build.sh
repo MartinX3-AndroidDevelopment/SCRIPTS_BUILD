@@ -2,7 +2,7 @@
 
 function set_variables() {
     echo "####SET VARIABLES START####"
-    aosp_version=13
+    aosp_version=14
     build_out=/out
     customROM_dir=/code
     echo "####SET VARIABLES END####"
@@ -19,7 +19,7 @@ function build_sonyAOSP() {
     functions_build_customROM_helper ${customROM_dir:?} "${1:?}"-userdebug
 
     cd ${customROM_dir:?}
-    echo "Log build to ${build_out}/aosp-${aosp_version}_"${2:?}"-build.log"
+    echo "Log build to ${build_out}/aosp-${aosp_version}_""${2:?}""-build.log"
     make -j dist > ${build_out}/aosp-${aosp_version}_"${2:?}"-build.log
     mv out/dist/"${1:?}"-ota-eng.*.zip ${build_out}/aosp-${aosp_version}-"$(date +%Y%m%d)"_"${2:?}".zip
     echo "####$1 Sim END####"
@@ -42,8 +42,8 @@ functions_update_customROM ${customROM_dir:?}
 add_custom_hacks
 
 build_sonyAOSP aosp_h8216 akari # XZ2_SS
-build_sonyAOSP aosp_h8314 apollo # XZ2C_SS
-build_sonyAOSP aosp_h8416 akatsuki # XZ3_SS
+# build_sonyAOSP aosp_h8314 apollo # XZ2C_SS # Disabled because Shujath provides it on XDA
+# build_sonyAOSP aosp_h8416 akatsuki # XZ3_SS # Disabled because Shujath provides it on XDA
 
 functions_success "Sony AOSP"
 
