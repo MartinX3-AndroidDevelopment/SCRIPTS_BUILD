@@ -1,16 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
-  "dockerfile": {
-    "fileMatch": [
-      "(^|/|\\.)Containerfile$",
-      "(^|/)Containerfile[^/]*$"
-    ]
-  },
-  "packageRules": [
-    {
-      "automerge": true,
-      "matchDatasources": ["docker"]
-    }
+  "extends": [
+    "config:best-practices"
   ]
 }
