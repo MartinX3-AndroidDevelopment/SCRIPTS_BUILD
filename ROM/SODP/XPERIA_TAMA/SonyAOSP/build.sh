@@ -37,11 +37,7 @@ set_variables
 
 functions_create_folders ${build_out:?}
 
-# functions_update_customROM ${customROM_dir:?} # TODO Workaround until the manifest got fixed upstream
-#  The following lines need to be removed https://github.com/ShujathMohd/local_manifests/blob/android-14.0.0_r1_legacy/qcom.xml#L36
-#    <project path="vendor/qcom/opensource/bootctrl" name="vendor-qcom-opensource-bootctrl" groups="device" remote="sony" revision="aosp/LA.UM.9.12.r1" />
-#  The following lines need to be removed https://github.com/ShujathMohd/local_manifests/blob/android-14.0.0_r1_legacy/untracked_hardware.xml#L5
-#    <remove-project name="platform/hardware/qcom/bootctrl" />
+functions_update_customROM ${customROM_dir:?}
 
 add_custom_hacks
 
