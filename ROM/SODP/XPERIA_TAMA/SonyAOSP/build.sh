@@ -45,9 +45,7 @@ functions_create_folders ${build_out:?}
 
 add_custom_hacks
 
-build_sonyAOSP aosp_h8216 akari # XZ2_SS
-# build_sonyAOSP aosp_h8314 apollo # XZ2C_SS # Disabled because Shujath provides it on XDA
-# build_sonyAOSP aosp_h8416 akatsuki # XZ3_SS # Disabled because Shujath provides it on XDA
+build_sonyAOSP aosp_h8216-ap1a akari # XZ2_SS
 
 functions_success "Sony AOSP"
 
