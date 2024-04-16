@@ -37,7 +37,7 @@ set_variables
 
 functions_create_folders ${build_out:?}
 
-functions_update_customROM ${customROM_dir:?}
+# functions_update_customROM ${customROM_dir:?} # TODO Temp deactivated until the tama changes got upstreamed to SODP
 
 add_custom_hacks
 
