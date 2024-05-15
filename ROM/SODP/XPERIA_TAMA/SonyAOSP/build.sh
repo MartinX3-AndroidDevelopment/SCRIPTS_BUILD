@@ -26,6 +26,23 @@ function build_sonyAOSP() {
     echo "####SONY AOSP BUILD END####"
 }
 
+# TODO Temp until the tama changes got upstreamed to SODP
+function functions_update_customROM_WORKAROUND() {
+    echo "####CustomROM UPDATE START####"
+    cd "${1:?}"/.repo/local_manifests || exit
+    git reset --hard
+    git pull
+
+    cd "${1:?}" || exit
+    repo forall -vc "git reset --hard"
+
+    repo sync -c -j8 --force-sync
+    ./apply_patch.sh
+
+    repo prune # Remove unneeded elements to save space and time.
+    echo "####CustomROM UPDATE END####"
+}
+
 # exit script immediately if a command fails or a variable is unset
 set -e
 
@@ -38,6 +55,8 @@ set_variables
 functions_create_folders ${build_out:?}
 
 # functions_update_customROM ${customROM_dir:?} # TODO Temp deactivated until the tama changes got upstreamed to SODP
+functions_update_customROM_WORKAROUND ${customROM_dir:?}  # TODO Temp until the tama changes got upstreamed to SODP
+
 
 add_custom_hacks
 
