@@ -46,7 +46,7 @@ function functions_update_customROM() {
     cd "${1:?}" || exit
     repo forall -vc "git reset --hard"
 
-    repo sync repo_update --force-sync
+    repo sync -c --force-sync repo_update
     ./repo_update.sh
 
     repo prune # Remove unneeded elements to save space and time.
