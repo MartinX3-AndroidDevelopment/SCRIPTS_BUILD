@@ -24,12 +24,10 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 
 COPY container/msmtprc /etc/msmtprc
 
-RUN useradd -m -s /bin/bash -u 1000 builder
+USER ubuntu
 
-USER builder
-
-RUN git config --global user.email "builder@example.com" \
-    && git config --global user.name "builder"
+RUN git config --global user.email "ubuntu@example.com" \
+    && git config --global user.name "ubuntu"
 
 RUN mkdir ~/bin \
     && curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo \
