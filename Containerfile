@@ -11,7 +11,6 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
         git \
         gperf \
         liblz4-tool \
-        libncurses5 \
         libssl-dev \
         libxml2-utils \
         make \
