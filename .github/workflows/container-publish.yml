@@ -1,7 +1,7 @@
 name: Publishing image to GitHub Packages
 on:
   push:
-    branches: [ "android-14" ]
+    branches: [ "android-15" ]
 jobs:
   build_push:
     runs-on: ubuntu-latest
