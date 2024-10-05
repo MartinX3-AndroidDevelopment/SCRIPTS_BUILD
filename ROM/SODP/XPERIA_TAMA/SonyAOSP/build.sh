@@ -2,7 +2,7 @@
 
 function set_variables() {
     echo "####SET VARIABLES START####"
-    aosp_version=14
+    aosp_version=15
     build_out=/out
     customROM_dir=/code
     echo "####SET VARIABLES END####"
@@ -60,7 +60,7 @@ functions_update_customROM_WORKAROUND ${customROM_dir:?}  # TODO Temp until the 
 
 add_custom_hacks
 
-build_sonyAOSP aosp_h8216-ap1a akari # XZ2_SS
+build_sonyAOSP aosp_h8216-ap3a akari # XZ2_SS
 
 functions_success "Sony AOSP"
 
