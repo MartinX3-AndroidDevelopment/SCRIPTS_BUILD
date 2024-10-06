@@ -36,7 +36,7 @@ function functions_update_customROM_WORKAROUND() {
     cd "${1:?}" || exit
     repo forall -vc "git reset --hard"
 
-    repo sync -c -j8 --force-sync
+    repo sync -c -j8 --force-sync --no-tags --no-clone-bundle --optimized-fetch --prune
     ./apply_patch.sh
 
     repo prune # Remove unneeded elements to save space and time.
