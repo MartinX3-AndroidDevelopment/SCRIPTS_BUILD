@@ -28,7 +28,11 @@ function functions_init() {
     # There is no real performance increase over incremental builds.
     # If you add or remove the ccache usage on a build by accident,
     #  aosp wipes your "out" folder and you need to compile everything again.
-    export WITHOUT_CHECK_API=true
+
+    # Place environmental variables here
+    # export WITHOUT_CHECK_API=true
+
+    return 0
 }
 
 function functions_success() {
