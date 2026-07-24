@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Build Image
         id: build_image
-        uses: redhat-actions/buildah-build@5d8479758cc72ed82df28daba521d27e20ff8c8a # v3.0.0
+        uses: redhat-actions/buildah-build@27e5954dfd56a621f706827f2de689dc955e8711 # v3.0.1
         with:
           image: ${{ github.repository }}
           containerfiles: |
