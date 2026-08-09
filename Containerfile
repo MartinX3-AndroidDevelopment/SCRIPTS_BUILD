@@ -10,7 +10,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
         g++-multilib \
         git \
         gperf \
-        liblz4-tool \
+        lz4 \
         libssl-dev \
         libxml2-utils \
         make \
