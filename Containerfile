@@ -1,4 +1,4 @@
-FROM docker.io/eclipse-temurin:26-jdk@sha256:196a32e6591e431e049a90baffdb03921ea0e1d05ec56ccaee311463e6640c47
+FROM docker.io/eclipse-temurin:26-jdk@sha256:e1ba898ddbb9aaae488ba25139dccbca3b4328a72fd089aa399c7e4b29171080
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
     && dpkg --add-architecture i386 \
